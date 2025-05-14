@@ -1,0 +1,28 @@
+---
+// Astro 计算逻辑保持不变
+const platform = "mastodon";
+const username = "food";
+const startDate = new Date("2022-04-27");
+const today = new Date();
+const diffTime = today.getTime() - startDate.getTime();
+const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+---
+<style>
+  footer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+  }
+
+  footer p {
+    margin: 0.2rem 0;
+  }
+</style>
+
+<footer>
+  <p>2022–2025｜蝴蝶曾在此处｜{diffDays} days</p>
+  <p>
+    点击此处看我
+    <a href="https://ramen-fsm.eu.org/web/@{username}" target="_blank" rel="noopener">嘟嘟</a>
+  </p>
+</footer>
