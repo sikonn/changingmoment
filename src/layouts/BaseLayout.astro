@@ -18,8 +18,8 @@ const { pageTitle } = Astro.props;
     <div class="container">
       <Header />
 
-      <h1>蝴蝶曾在此处</h1>
-      <h2>STRENGTH CAN BE BUILT</h2>
+      <h1>{pageTitle}</h1>
+      <!-- <h2>STRENGTH CAN BE BUILT</h2> 可以移除或保留 -->
 
       <slot />
 

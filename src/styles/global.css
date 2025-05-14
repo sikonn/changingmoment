@@ -31,6 +31,18 @@ body {
   box-sizing: border-box;
   text-align: center;
 }
+/* 图片自适应容器宽度 */
+.container img {
+  width: 100%;
+  height: auto;  /* 保持图片比例 */
+  display: block; /* 去除图片下方的空白间隙 */
+  border-radius: 8px; /* 为图片增加圆角，匹配容器圆角 */
+  margin: 1rem 0; /* 为图片添加上下间距 */
+}
+/* 确保正文内容的字体是正常的，不加粗 */
+.container p, .container h1, .container h2, .container h3, .container h4, .container h5, .container h6 {
+  font-weight: normal;
+}
 
 /* 顶部导航栏 */
 .navbar {
@@ -176,3 +188,10 @@ strong,
   text-decoration: underline;
 }
 
+body {
+  font-family: 'VT323', monospace;
+}
+
+.friend-links {
+  font-family: 'VT323', monospace;
+}

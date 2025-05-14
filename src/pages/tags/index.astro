@@ -3,30 +3,82 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true }));
 const tags = [...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat())];
 const pageTitle = "Tag Index";
+
 ---
 <BaseLayout pageTitle={pageTitle}>
-    <div class="tags">
-      {tags.map((tag) => (
-        <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
-      ))}
-    </div>
-  </BaseLayout>
-  <style>
-    a {
-      color: #00539F;
-    }
-  
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-    }
-  
-    .tag {
-      margin: 0.25em;
-      border: dotted 1px #a1a1a1;
-      border-radius: .5em;
-      padding: .5em 1em;
-      font-size: 1.15em;
-      background-color: #F8FCFD;
-    }
-  </style>
+  <div class="tags" id="tag-container">
+    {tags.map((tag) => (
+      <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
+    ))}
+  </div>
+
+  <script type="module">
+    const colors = [
+      'rgba(255, 192, 203, 0.6)',  // pink
+      'rgba(173, 216, 230, 0.6)',  // lightblue
+      'rgba(240, 230, 140, 0.6)',  // khaki
+      'rgba(144, 238, 144, 0.6)',  // lightgreen
+      'rgba(216, 191, 216, 0.6)',  // thistle
+      'rgba(255, 160, 122, 0.6)',  // lightsalmon
+      'rgba(224, 255, 255, 0.6)',  // lightcyan
+      'rgba(255, 215, 0, 0.6)',    // gold
+      'rgba(176, 224, 230, 0.6)',  // powderblue
+      'rgba(255, 182, 193, 0.6)'   // lightpink
+     ];
+
+    document.querySelectorAll('.tag').forEach(tag => {
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      tag.style.backgroundColor = color;
+      tag.style.borderColor = color;
+    });
+
+    document.querySelectorAll('.tag a').forEach(link => {
+      link.addEventListener('mousedown', () => {
+        link.classList.add('clicked');
+      });
+      link.addEventListener('mouseup', () => {
+        setTimeout(() => link.classList.remove('clicked'), 150);
+      });
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5em;
+    margin-top: 1em;
+  }
+
+  .tag {
+    border: dotted 1px #aaa;
+    border-radius: 10% 50% 10% 50%; /* 云朵形状 */
+    padding: 0.75em 1.5em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    font-size: 1.1em;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    opacity: 0.8;
+  }
+
+  .tag:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+  }
+
+  .tag a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: transform 0.1s ease;
+    display: inline-block;
+  }
+
+  .tag a.clicked {
+    transform: scale(0.9);
+  }
+</style>

@@ -13,10 +13,79 @@ const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
 ---
 
 <Layout title={pageTitle}>
-  <h1>{pageTitle}</h1>
-  <h2>... and my new Astro site!</h2>
+  <section class="about-container">
+    <h1>{pageTitle}</h1>
+    <h2 class="subtitle">蝴蝶曾在此处，一只沉迷于自己世界的小猫。</h2>
 
-  <p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
-
-  <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
+    <div class="motto-list">
+      <p class="motto color1"><span class="year">2022：</span>就在此刻，改变时刻。</p>
+      <p class="motto color2"><span class="year">2023：</span>wish for nothing，but accomplish something.</p>
+      <p class="motto color3"><span class="year">2024：</span>strength can be built.</p>
+      <p class="motto color4"><span class="year">2025：</span>今できることを全力で</p>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .about-container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3em 1.5em;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 2em;
+  }
+
+  .motto-list {
+    text-align: left;
+    font-size: 1em;
+    line-height: 0.8;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+  }
+
+  .motto {
+    position: relative;
+    padding-bottom: 0.2em;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+
+  .motto:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+  }
+
+  .motto::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .motto:hover::after {
+    transform: scaleX(1);
+  }
+
+  .year {
+    font-weight: bold;
+  }
+
+  /* 预设随机配色池 */
+  .color1 { color: #c06c84; }
+  .color2 { color: #6c5b7b; }
+  .color3 { color: #355c7d; }
+  .color4 { color: #f67280; }
+  .color5 { color: #ffa07a; }
+</style>
