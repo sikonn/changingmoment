@@ -146,3 +146,33 @@ strong,
   color: #888;
   white-space: nowrap;
 }
+/* 内容左对齐 */
+.container {
+  text-align: left;
+}
+
+/* 友链列表样式 */
+.friend-links {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1.5rem;
+}
+
+.friend-links li {
+  margin-bottom: 0.6rem;
+  font-size: 15px;
+  color: #444;
+  line-height: 1.6;
+}
+
+.friend-links li a {
+  color: #444;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.friend-links li a:hover {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
