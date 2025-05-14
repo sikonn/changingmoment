@@ -2,7 +2,7 @@
 import Header from '../components/Header.astro';
 import "../styles/global.css";
 import Footer from '../components/Footer.astro';
-const pageTitle = "Friends";
+const { pageTitle } = Astro.props;
 ---
 
 <html lang="zh-cn">
@@ -16,8 +16,12 @@ const pageTitle = "Friends";
   <body>
 	<Header />
 
-    <h1>My friends</h1>
-    <p>This is where I will post about my journey learning Astro.</p>
-    <Footer />
+	<h1>蝴蝶曾在此处</h1>
+	<h2>STRENGTH CAN BE BUILT</h2>
+    <slot />
+	<Footer />
+	<script>
+		import "../scripts/menu.js";
+	  </script>
   </body>
 </html>
