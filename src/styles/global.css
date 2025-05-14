@@ -1,89 +1,112 @@
-html {
-    background-color: #f1f5f9;
-    font-family: sans-serif;
-  }
-  
-  body {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 80ch;
-    padding: 1rem;
-    line-height: 1.5;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
-  
-  h1 {
-    margin: 1rem 0;
-    font-size: 2.5rem;
-  }
-  
-  /* nav styles */
-  .hamburger {
-    padding-right: 20px;
-    cursor: pointer;
-  }
-  
-  .hamburger .line {
-    display: block;
-    width: 40px;
-    height: 5px;
-    margin-bottom: 10px;
-    background-color: #ff9776;
-  }
-  .nav-links {
-    width: 100%;
-    top: 5rem;
-    left: 48px;
-    background-color: #ff9776;
-    display: none;
-    margin: 0;
-  }
-  
-  .nav-links a {
-    display: block;
-    text-align: center;
-    padding: 10px 0;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  
-  .nav-links a:hover,
-  .nav-links a:focus {
-    background-color: #ff9776;
-  }
-  
-  .expanded {
-    display: unset;
-  }
-  
-  @media screen and (min-width: 636px) {
-    .nav-links {
-      margin-left: 5em;
-      display: block;
-      position: static;
-      width: auto;
-      background: none;
-    }
-  
-    .nav-links a {
-      display: inline-block;
-      padding: 15px 20px;
-    }
-    .hamburger {
-        display: none;
-      }
-    html.dark {
-        background-color: #0d0950;
-        color: #fff;
-      }
-      
-    .dark .nav-links a {
-        color: #fff;
-      }
-  
-  }
+/* 页面基础设置 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'VT323', monospace;
+  background: url('https://github.com/sikonn/picx-images-hosting/raw/master/GpSldJRawAAKrZm.8l0b5hxxh9.webp') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* 内容框容器 */
+.container {
+  margin: 2rem auto;
+  background-color: rgba(255, 255, 255, 0.85); /* 加了透明度 */
+  border: 3px solid #d3c3c3;
+  border-radius: 16px;
+  box-shadow: 4px 4px 10px rgba(196, 180, 180, 0.3);
+  padding: 2.5rem;
+  max-width: 720px;
+  width: 90%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+
+/* 顶部导航栏 */
+.navbar {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.navbar a {
+  text-decoration: none;
+  font-size: 20px;
+  padding: 8px 16px;
+  border: 2px dashed #d0bebe;
+  border-radius: 12px;
+  color: #5b8db0;
+  background-color: #fcfcfc;
+  transition: all 0.25s ease;
+}
+
+.navbar a:hover {
+  background-color: #e7f5ff;
+  color: #3a6a84;
+}
+
+/* 主标题 */
+h1 {
+  font-size: 38px;
+  color: #4a4a4a;
+  margin: 1.5rem 0 0.5rem;
+}
+
+/* 副标题 */
+h2 {
+  font-size: 22px;
+  color: #666;
+  margin: 0 0 1.5rem;
+}
+
+/* 普通段落 */
+p {
+  font-size: 20px;
+  color: #444;
+}
+
+/* 强调文本（英文） */
+strong,
+.strong-text {
+  font-family: monospace;
+  font-size: 22px;
+  font-weight: bold;
+  color: #222;
+}
+
+/* 欢迎信息样式 */
+.welcome {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  margin: 1rem 0;
+}
+
+/* 按钮样式 */
+.button {
+  padding: 8px 16px;
+  font-size: 18px;
+  background-color: #fff;
+  border: 2px solid #888;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.button:hover {
+  background-color: #f4f4f4;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 页脚样式 */
+.footer {
+  margin-top: 2rem;
+  font-size: 16px;
+  color: #888;
+}
