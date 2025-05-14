@@ -1,28 +1,25 @@
 ---
-import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
 import BlogPost from '../components/BlogPost.astro';
-import "../styles/global.css";
-import Footer from '../components/Footer.astro';
-const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
+
+const allPosts = Object.values(
+  import.meta.glob('./posts/*.md', { eager: true })
+);
+
 const pageTitle = "Blog";
 ---
 
-<html lang="zh-cn">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type ="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content = {Astro.generator} >
-    <title>Astro</title>
-  </head>
-  <body>
-	<Header />
+<Layout title={pageTitle}>
+  <h1>My Astro Learning Blog</h1>
+  <p>This is where I will post about my journey learning Astro.</p>
 
-    <h1>My Astro Learning Blog</h1>
-    <p>This is where I will post about my journey learning Astro.</p>
-    <ul>
-        {allPosts.map((post: any) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
-      </ul>
-      <Footer />
-  </body>
-</html> 
+  <ul>
+    {allPosts.map((post: any) => (
+      <BlogPost
+        url={post.url}
+        title={post.frontmatter.title}
+        pubDate={post.frontmatter.pubDate}
+      />
+    ))}
+  </ul>
+</Layout>

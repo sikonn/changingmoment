@@ -1,8 +1,15 @@
+/* 字体导入（Google Fonts） */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap'); /* 中文部分可以尝试使用 Noto Sans Mono */
+
 /* 页面基础设置 */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'VT323', monospace;
+  font-family: 'VT323', 'Noto Sans Mono', 'Microsoft YaHei', 'PingFang SC', 'Noto Sans CJK', monospace, sans-serif; /* 加入 Noto Sans CJK 或系统的像素字体 */
+  font-weight: bold; /* 强调加粗效果 */
+  letter-spacing: 1px; /* 调整字间距，增强像素感 */
+  line-height: 1.2;    /* 调整行间距，模拟像素感 */
   background: url('https://github.com/sikonn/picx-images-hosting/raw/master/GpSldJRawAAKrZm.8l0b5hxxh9.webp') no-repeat center center fixed;
   background-size: cover;
   display: flex;
@@ -24,7 +31,6 @@ body {
   box-sizing: border-box;
   text-align: center;
 }
-
 
 /* 顶部导航栏 */
 .navbar {
@@ -74,7 +80,7 @@ p {
 /* 强调文本（英文） */
 strong,
 .strong-text {
-  font-family: monospace;
+  font-family: 'VT323', monospace; /* 确保英文文本为像素风字体 */
   font-size: 22px;
   font-weight: bold;
   color: #222;
@@ -109,4 +115,34 @@ strong,
   margin-top: 2rem;
   font-size: 16px;
   color: #888;
+}
+
+.post-item {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.8rem;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-title {
+  font-size: 22px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.post-title:hover {
+  color: #0066cc;
+}
+
+.post-date {
+  font-size: 16px;
+  color: #888;
+  white-space: nowrap;
 }

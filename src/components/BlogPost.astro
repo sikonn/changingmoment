@@ -1,4 +1,13 @@
 ---
-const { title, url } = Astro.props
+// BlogPost.astro
+const { url, title, pubDate } = Astro.props;
 ---
-<li><a href={url}>{title}</a></li>
+
+<li class="post-item">
+  <div class="post-header">
+    <a href={url} class="post-title">{title}</a>
+    <span class="post-date">
+      {new Date(pubDate).toLocaleDateString('zh-CN')}
+    </span>
+  </div>
+</li>

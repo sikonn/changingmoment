@@ -1,23 +1,9 @@
 ---
-import Header from '../components/Header.astro';
-import "../styles/global.css";
-import Footer from '../components/Footer.astro';
+import Layout from '../layouts/Layout.astro';
 const pageTitle = "Friends";
 ---
 
-<html lang="zh-cn">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type ="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content = {Astro.generator} >
-    <title>Astro</title>
-  </head>
-  <body>
-	<Header />
-
-    <h1>My friends</h1>
-    <p>This is where I will post about my journey learning Astro.</p>
-    <Footer />
-  </body>
-</html>
+<Layout title={pageTitle}>
+  <h1>My Friends</h1>
+  <p>This is where I will post about my journey learning Astro.</p>
+</Layout>
