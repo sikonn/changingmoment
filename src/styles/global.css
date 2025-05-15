@@ -31,6 +31,18 @@ body {
   box-sizing: border-box;
   text-align: center;
 }
+.container::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 40px;
+  height: 40px;
+  background: url('/stickers/star.png') no-repeat center center;
+  background-size: contain;
+  z-index: 10;
+}
+
 /* 图片自适应容器宽度 */
 .container img {
   width: 100%;
