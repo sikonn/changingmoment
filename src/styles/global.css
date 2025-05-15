@@ -1,15 +1,11 @@
 /* 字体导入（Google Fonts） */
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap'); /* 中文部分可以尝试使用 Noto Sans Mono */
-@import url('https://fonts.googleapis.com/css2?family=VT323&family=Patrick+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC&family=VT323&display=swap');
 /* 页面基础设置 */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'VT323', 'Noto Sans Mono', 'Microsoft YaHei', 'PingFang SC', 'Noto Sans CJK', monospace, sans-serif; /* 加入 Noto Sans CJK 或系统的像素字体 */
-  font-weight: bold; /* 强调加粗效果 */
-  letter-spacing: 1px; /* 调整字间距，增强像素感 */
-  line-height: 1.2;    /* 调整行间距，模拟像素感 */
+  font-family: 'Noto Serif SC', 'Noto Sans CJK', 'Microsoft YaHei', serif;
+  font-weight: normal;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
   background: url('https://github.com/sikonn/picx-images-hosting/raw/master/GpSldJRawAAKrZm.8l0b5hxxh9.webp') no-repeat center center fixed;
   background-size: cover;
   display: flex;
@@ -17,6 +13,17 @@ body {
   align-items: center;
   min-height: 100vh;
 }
+
+/* 强调英文或数字用像素风格 */
+strong,
+code,
+.strong-text {
+  font-family: 'VT323', monospace;
+  font-weight: normal;
+  font-size: 20px;
+  color: #222;
+}
+
 
 .container {
   margin: 2rem auto;
