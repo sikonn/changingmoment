@@ -122,28 +122,56 @@ code,
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* 导航栏 */
+/* —— 导航栏基础 —— */
 .navbar {
-  margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
+
 .navbar a {
+  position: relative;
+  padding: 0.5em 1em;
+  font-size: 1.1rem;
   text-decoration: none;
-  font-size: 20px;
-  padding: 8px 16px;
-  border: 2px dashed #d0bebe;
-  border-radius: 12px;
-  color: #5b8db0;
-  background-color: #fcfcfc;
-  transition: all 0.25s ease;
+  border-radius: 8px;
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 500;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
+/* 下划线 hover 动画 */
+.navbar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
 .navbar a:hover {
-  background-color: #e7f5ff;
-  color: #3a6a84;
+  transform: translateY(-2px);
+  opacity: 0.95;
 }
+
+.navbar a:hover::after {
+  transform: scaleX(1);
+}
+
+/* 多彩效果：根据顺序设置颜色 */
+.navbar a:nth-child(1) { color: #c06c84; border: 1px dashed #c06c84; }
+.navbar a:nth-child(2) { color: #6c5b7b; border: 1px dashed #6c5b7b; }
+.navbar a:nth-child(3) { color: #355c7d; border: 1px dashed #355c7d; }
+.navbar a:nth-child(4) { color: #f67280; border: 1px dashed #f67280; }
+.navbar a:nth-child(5) { color: #ffa07a; border: 1px dashed #ffa07a; }
+
 
 /* 文章列表 */
 .post-item {
@@ -201,3 +229,31 @@ code,
   font-size: 16px;
   color: #888;
 }
+
+.floating-quote {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.4rem;
+  color: #666;
+  text-align: center;
+  margin: 3rem auto 2rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 20px;
+  max-width: 600px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(200, 200, 200, 0.25);
+  animation: cloudFade 10s ease-in-out infinite alternate;
+}
+
+@keyframes cloudFade {
+  0% { transform: translateY(0px); opacity: 0.9; }
+  100% { transform: translateY(-8px); opacity: 1; }
+}
+
+.floating-quote p {
+  margin: 0;
+  line-height: 1.8;
+  color: #444;
+}
+

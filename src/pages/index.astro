@@ -1,7 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Greeting from '../components/Greeting';
 const pageTitle = "蝴蝶曾在此处";
 ---
-<BaseLayout pageTitle={pageTitle}></BaseLayout>
+
+<BaseLayout pageTitle={pageTitle}>
+  <div class="self-note">
+    <p>幸せは食べて寝て人生を楽しんで待て</p>
+  </div>
+</BaseLayout>
+
 <script src="/random-highlight.js" defer></script>
