@@ -212,3 +212,19 @@ body {
 .friend-links {
   font-family: 'VT323', monospace;
 }
+
+body {
+  font-size: 16px; /* 原来可能是20px或更大，调小一点 */
+}
+
+.container p {
+  font-size: 16px;
+}
+
+.container h1 {
+  font-size: 30px;
+}
+
+.container h2 {
+  font-size: 20px;
+}
