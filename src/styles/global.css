@@ -1,11 +1,14 @@
-/* 字体导入（Google Fonts） */
+/* 字体导入 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC&family=VT323&display=swap');
+
 /* 页面基础设置 */
 body {
+  margin: 0;
+  padding: 0;
   font-family: 'Noto Serif SC', 'Noto Sans CJK', 'Microsoft YaHei', serif;
   font-weight: normal;
-  line-height: 1.6;
   letter-spacing: 0.5px;
+  line-height: 1.6;
   background: url('https://github.com/sikonn/picx-images-hosting/raw/master/GpSldJRawAAKrZm.8l0b5hxxh9.webp') no-repeat center center fixed;
   background-size: cover;
   display: flex;
@@ -14,17 +17,7 @@ body {
   min-height: 100vh;
 }
 
-/* 强调英文或数字用像素风格 */
-strong,
-code,
-.strong-text {
-  font-family: 'VT323', monospace;
-  font-weight: normal;
-  font-size: 20px;
-  color: #222;
-}
-
-
+/* 容器样式 */
 .container {
   margin: 2rem auto;
   background: rgba(255, 255, 255, 0.75);
@@ -36,13 +29,13 @@ code,
   text-align: left;
   backdrop-filter: blur(4px);
   background-image: radial-gradient(#ccc 1px, transparent 1px);
-  background-size: 16px 16px; /* 点阵大小可调 */
+  background-size: 16px 16px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
-
-  /* 可爱边框 */
   border: 2.5px dashed #e4d0d0;
   position: relative;
 }
+
+/* 可爱贴纸 */
 .container::before {
   content: "";
   position: absolute;
@@ -55,20 +48,81 @@ code,
   z-index: 10;
 }
 
-/* 图片自适应容器宽度 */
+/* 图片自适应 */
 .container img {
   width: 100%;
-  height: auto;  /* 保持图片比例 */
-  display: block; /* 去除图片下方的空白间隙 */
-  border-radius: 8px; /* 为图片增加圆角，匹配容器圆角 */
-  margin: 1rem 0; /* 为图片添加上下间距 */
-}
-/* 确保正文内容的字体是正常的，不加粗 */
-.container p, .container h1, .container h2, .container h3, .container h4, .container h5, .container h6 {
-  font-weight: normal;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  margin: 1rem 0;
 }
 
-/* 顶部导航栏 */
+/* 标题统一风格 */
+.container h1,
+.container h2,
+.container h3,
+.container h4,
+.container h5,
+.container h6 {
+  font-weight: normal;
+  font-family: 'Noto Serif SC', serif;
+}
+
+/* 主标题 */
+h1 {
+  font-size: 38px;
+  color: #4a4a4a;
+  margin: 1.5rem 0 0.5rem;
+}
+
+/* 去除副标题特殊样式 */
+h2 {
+  font-size: 22px;
+  color: #666;
+  margin: 0 0 1.5rem;
+}
+
+/* 段落 */
+p {
+  font-size: 20px;
+  color: #444;
+  font-family: 'Noto Serif SC', serif;
+}
+
+/* 强调（英文或数字） */
+strong,
+code,
+.strong-text {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  font-weight: normal;
+  color: #222;
+}
+
+/* 欢迎信息 */
+.welcome {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  margin: 1rem 0;
+}
+
+/* 按钮 */
+.button {
+  padding: 8px 16px;
+  font-size: 18px;
+  background-color: #fff;
+  border: 2px solid #888;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.button:hover {
+  background-color: #f4f4f4;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 导航栏 */
 .navbar {
   margin-bottom: 1.5rem;
   display: flex;
@@ -76,7 +130,6 @@ code,
   flex-wrap: wrap;
   gap: 1rem;
 }
-
 .navbar a {
   text-decoration: none;
   font-size: 20px;
@@ -87,84 +140,22 @@ code,
   background-color: #fcfcfc;
   transition: all 0.25s ease;
 }
-
 .navbar a:hover {
   background-color: #e7f5ff;
   color: #3a6a84;
 }
 
-/* 主标题 */
-h1 {
-  font-size: 38px;
-  color: #4a4a4a;
-  margin: 1.5rem 0 0.5rem;
-}
-
-/* 副标题 */
-h2 {
-  font-size: 22px;
-  color: #666;
-  margin: 0 0 1.5rem;
-}
-
-/* 普通段落 */
-p {
-  font-size: 20px;
-  color: #444;
-}
-
-/* 强调文本（英文） */
-strong,
-.strong-text {
-  font-family: 'VT323', monospace; /* 确保英文文本为像素风字体 */
-  font-size: 22px;
-  font-weight: bold;
-  color: #222;
-}
-
-/* 欢迎信息样式 */
-.welcome {
-  font-size: 24px;
-  font-weight: bold;
-  color: #000;
-  margin: 1rem 0;
-}
-
-/* 按钮样式 */
-.button {
-  padding: 8px 16px;
-  font-size: 18px;
-  background-color: #fff;
-  border: 2px solid #888;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s;
-}
-
-.button:hover {
-  background-color: #f4f4f4;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* 页脚样式 */
-.footer {
-  margin-top: 2rem;
-  font-size: 16px;
-  color: #888;
-}
-
+/* 文章列表 */
 .post-item {
   margin-bottom: 1.5rem;
   border-bottom: 1px solid #e0e0e0;
   padding-bottom: 0.8rem;
 }
-
 .post-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .post-title {
   font-size: 22px;
   color: #333;
@@ -172,66 +163,41 @@ strong,
   font-weight: 600;
   transition: color 0.2s ease;
 }
-
 .post-title:hover {
   color: #0066cc;
 }
-
 .post-date {
   font-size: 16px;
   color: #888;
   white-space: nowrap;
 }
-/* 内容左对齐 */
-.container {
-  text-align: left;
-}
 
-/* 友链列表样式 */
+/* 友链列表 */
 .friend-links {
   list-style: none;
   padding-left: 0;
   margin-top: 1.5rem;
+  font-family: 'VT323', monospace;
 }
-
 .friend-links li {
   margin-bottom: 0.6rem;
   font-size: 15px;
   color: #444;
   line-height: 1.6;
 }
-
 .friend-links li a {
   color: #444;
   text-decoration: none;
   font-weight: bold;
 }
-
 .friend-links li a:hover {
   color: #0066cc;
   text-decoration: underline;
 }
 
-body {
-  font-family: 'VT323', monospace;
-}
-
-.friend-links {
-  font-family: 'VT323', monospace;
-}
-
-body {
-  font-size: 16px; /* 原来可能是20px或更大，调小一点 */
-}
-
-.container p {
+/* 页脚 */
+.footer {
+  margin-top: 2rem;
   font-size: 16px;
-}
-
-.container h1 {
-  font-size: 30px;
-}
-
-.container h2 {
-  font-size: 20px;
+  color: #888;
 }
