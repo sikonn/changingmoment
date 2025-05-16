@@ -1,10 +1,39 @@
 ---
-// navigation.astro
+const navItems = [
+  { name: "Home", url: "/" },
+  { name: "About", url: "/about" },
+  { name: "Blog", url: "/blog" },
+  { name: "Tags", url: "/tags" },
+  { name: "Friends", url: "/friends" },
+];
 ---
-<div class="navbar">
-    <a href="/">Home</a>
-    <a href="/blog/">Blog</a>
-    <a href="/tags/">Tags</a>
-    <a href="/about/">About</a>
-    <a href="/friends/">Friends</a>
-</div>
+<nav class="nav" id="nav">
+  <ul>
+    {navItems.map(item => (
+      <li><a href={item.url}>{item.name}</a></li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+.nav {
+  display: flex;
+  gap: 1.2em;
+}
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 1em;
+  }
+  .nav.show {
+    display: flex;
+  }
+}
+</style>

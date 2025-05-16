@@ -2,9 +2,19 @@
 import Hamburger from './Hamburger.astro';
 import Navigation from './Navigation.astro';
 ---
+
 <header>
- <nav>
-   <Hamburger />
-   <Navigation />
- </nav>
+  <nav>
+    <Hamburger />
+    <Navigation />
+  </nav>
+
+  <script type="module" is:inline>
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+
+    hamburger?.addEventListener('click', () => {
+      nav?.classList.toggle('show');
+    });
+  </script>
 </header>
