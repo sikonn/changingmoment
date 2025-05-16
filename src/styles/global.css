@@ -193,7 +193,7 @@ code,
   transition: color 0.2s ease;
 }
 .post-title:hover {
-  color: #0066cc;
+  color: #f08a99;
 }
 .post-date {
   font-size: 16px;
@@ -220,7 +220,7 @@ code,
   font-weight: bold;
 }
 .friend-links li a:hover {
-  color: #0066cc;
+  color: #f08a99;
   text-decoration: underline;
 }
 
