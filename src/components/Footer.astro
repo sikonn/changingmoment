@@ -11,12 +11,17 @@ const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
   footer {
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
+    text-align: right; /* ✅ 加这一行 */
   }
 
   footer p {
     margin: 0.2rem 0;
   }
+  footer p {
+  margin: 0.2rem 0;
+  font-size: 0.85rem; /* 或者 0.75rem 更小 */
+}
 </style>
 
 <footer>
