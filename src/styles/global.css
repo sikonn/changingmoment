@@ -126,15 +126,15 @@ code,
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.7rem;
   margin-bottom: 1.5rem;
-  transform: scale(0.85); /* 整体缩小 */
+  transform: scale(0.9); /* 整体缩小 */
   transform-origin: top center;
 }
 
 .navbar a {
   position: relative;
-  padding: 0.3em 0.8em;
+  padding: 0.4em 0.9em;
   font-size: 0.9rem;
   text-decoration: none;
   border-radius: 7px;
