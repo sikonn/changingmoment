@@ -1,9 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro'; // ← 路径根据页面所在目录调整
 const pageTitle = "Friends";
 ---
 
-<Layout title={pageTitle}>
+<BaseLayout title={pageTitle}>
   <h1>My Friends</h1>
   <p>我有一个朋友</p>
 
@@ -57,7 +57,7 @@ const pageTitle = "Friends";
       link.style.borderColor = color;
     });
   </script>
-</Layout>
+</BaseLayout>
 
 <style>
 .friend-links {
