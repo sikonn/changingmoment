@@ -11,20 +11,16 @@ const { pageTitle } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+
+    <!-- ✅ 加上这行 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC&family=VT323&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <!-- 白色容器开始 -->
     <div class="container">
       <Header />
-
       <h1>{pageTitle}</h1>
-      <!-- <h2>STRENGTH CAN BE BUILT</h2> 可以移除或保留 -->
-
       <slot />
-
       <Footer />
     </div>
-    <!-- 白色容器结束 -->
   </body>
 </html>
