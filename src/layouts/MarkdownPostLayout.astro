@@ -4,7 +4,12 @@ const { frontmatter } = Astro.props;
 ---
 <BaseLayout pageTitle={frontmatter.title}>
   <p><em>{frontmatter.description}</em></p>
-  <p>{frontmatter.pubDate.toString().slice(0,10)}</p>
+  <p>
+    <span>{frontmatter.pubDate.toString().slice(0, 10)}</span>
+    <span>· {frontmatter.tags}</span>
+    <span>· {frontmatter.wordCount}字</span>
+    <span>· 预计阅读{frontmatter.readTime}分钟</span>
+  </p>
   <slot />
 </BaseLayout>
 

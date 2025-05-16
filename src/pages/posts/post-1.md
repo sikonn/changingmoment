@@ -3,6 +3,8 @@ layout: ../../layouts/MarkdownPostLayout.astro
 title: '月记｜4月:也成为了开始的季节'
 pubDate: 2025-05-02
 tags: ["不觉碧山暮"]
+wordCount: 1856
+readTime: 5
 ---
 # 一起出门赏樱吧
 
