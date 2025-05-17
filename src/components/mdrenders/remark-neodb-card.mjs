@@ -2,11 +2,14 @@ import { visit } from 'unist-util-visit';
 import { toHtml } from 'hast-util-to-html';
 import { h } from 'hastscript';
 
+// 获取接口数据
 async function fetchResource(resourceType, resourceId) {
   const apiUrl = `https://neodb.social/api/${resourceType}/${resourceId}`;
   try {
     const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error('Failed to fetch resource');
+    if (!response.ok) {
+      throw new Error('Failed to fetch resource');
+    }
     return await response.json();
   } catch (error) {
     console.error('Error fetching resource:', error);
@@ -18,53 +21,30 @@ export default function fetchAndInjectContent() {
   return async (tree) => {
     const promises = [];
 
-    visit(tree, 'text', (node, index, parent) => {
-      // 解析格式 ++resourceType/resourceId|rating|comment++
-      // rating 和 comment 都可选，comment 可能有空格或中文
-      const regex = /\+\+(\w+)\/([^|+]+)(\|([^|+]*))?(\|([^+]*))?\+\+/g;
-
-      let lastIndex = 0;
-      const newChildren = [];
-
-      let match;
-      while ((match = regex.exec(node.value)) !== null) {
-        const [fullMatch, resourceType, resourceId] = match;
-        // match[4] 是第一个可选参数 rating
-        const ratingRaw = match[4] || '';
-        // match[6] 是第二个可选参数 comment
-        const commentRaw = match[6] || '';
-
-        // 先放入匹配前的纯文本
-        if (match.index > lastIndex) {
-          newChildren.push({
-            type: 'text',
-            value: node.value.slice(lastIndex, match.index),
-          });
-        }
-
-        const promiseIndex = newChildren.length;
-        // 先放空占位，之后填充异步请求的内容
-        newChildren.push({ type: 'text', value: '' });
+    visit(tree, 'text', (node) => {
+      // 匹配格式：++资源类型/资源ID|评分|评论++
+      // |评分 和 |评论 都是可选，且评分可以是 emoji 或数字等任意文本
+      const match = node.value.match(/\+\+(.*?)\/(.*?)(\|(.*?))?(\|(.*?))?\+\+/);
+      if (match) {
+        const resourceType = match[1];
+        const resourceId = match[2];
+        const ratingRaw = match[4] || '';  // 评分（emoji等）
+        const commentRaw = match[6] || ''; // 评论内容
 
         const promise = fetchResource(resourceType, resourceId).then((data) => {
-          let html = '';
           if (data) {
             const MAX_LENGTH = 100;
 
-            // briefText 如果没传 comment，就用 data.brief，否则用 commentRaw
+            // 如果评论输入了，用评论，否则用接口brief
             const briefText = commentRaw
               ? commentRaw
               : data.brief
               ? (data.brief.length > MAX_LENGTH ? data.brief.slice(0, MAX_LENGTH) + '...' : data.brief)
               : '';
 
-            // 验证评分是否是有效数字
-            const rating = ratingRaw.trim();
-            const isRatingNumber =
-              rating !== '' && !isNaN(Number(rating)) && Number(rating) > 0;
+            const ratingText = ratingRaw.trim();
 
-            const ratingText = isRatingNumber ? rating : '';
-
+            // 生成卡片html结构
             const cardElement = h('div.db-card-wrapper', [
               h('div.db-card', [
                 h(
@@ -86,11 +66,10 @@ export default function fetchAndInjectContent() {
                     ]),
                     h('div.db-card-content', [
                       h('div.db-card-title', data.title),
-                      // 评分单独显示，如果有评分才显示，否则空
-                      h(
-                        'div.rating',
-                        ratingText ? [` rate: ${ratingText} / 10`] : ['']
-                      ),
+                      // 仅当评分非空时显示评分
+                      ...(ratingText
+                        ? [h('div.rating', [h('span', ratingText)])]
+                        : []),
                       h('div.db-card-abstract', briefText),
                     ]),
                   ]
@@ -98,30 +77,16 @@ export default function fetchAndInjectContent() {
               ]),
             ]);
 
-            html = toHtml(cardElement);
+            node.type = 'html';
+            node.value = toHtml(cardElement);
           } else {
-            html = '<p style="text-align: center;"><small>Failed to fetch resource data.</small></p>';
+            node.type = 'html';
+            node.value =
+              '<p style="text-align: center;"><small>Failed to fetch resource data.</small></p>';
           }
-
-          newChildren.splice(promiseIndex, 1, {
-            type: 'html',
-            value: html,
-          });
         });
 
         promises.push(promise);
-        lastIndex = match.index + fullMatch.length;
-      }
-
-      if (lastIndex < node.value.length) {
-        newChildren.push({
-          type: 'text',
-          value: node.value.slice(lastIndex),
-        });
-      }
-
-      if (newChildren.length > 0) {
-        parent.children.splice(index, 1, ...newChildren);
       }
     });
 
