@@ -281,17 +281,24 @@ iframe {
   margin: 1rem 0;
 }
 
+.db-card-wrapper {
+  background-color: rgba(255, 182, 193, 0.2); /* 半透明浅粉色背景 */
+  border: 2px dashed #ffb6c1;                /* 浅粉色虚线边框 */
+  border-radius: 16px;                        /* 较大的圆角 */
+  padding: 6px;                              /* 留出空间显示边框和背景 */
+  margin: 1rem 0;
+}
+
 .db-card {
   display: flex;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 0 12px rgba(0,0,0,0.1);
   border: 1px solid #eee;
-  margin: 1rem 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #fff;
   transition: box-shadow 0.3s ease;
 }
+
 .db-card:hover {
   box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
@@ -301,6 +308,7 @@ iframe {
   align-items: flex-start;
   width: 100%;
   color: inherit;
+  text-decoration: none;
 }
 
 .db-card-post {
@@ -309,9 +317,9 @@ iframe {
 }
 
 .db-card-post img {
-  height: 150px;         /* 固定高度 */
-  width: auto;           /* 宽度自适应 */
-  object-fit: contain;   /* 保持比例，留白 */
+  height: 150px;
+  width: auto;
+  object-fit: contain;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
   background-color: #f9f9f9;
