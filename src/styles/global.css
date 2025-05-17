@@ -69,21 +69,21 @@ body {
 
 /* 主标题 */
 h1 {
-  font-size: 25px;
+  font-size: 35px;
   color: #4a4a4a;
   margin: 1.5rem 0 0.5rem;
 }
 
 /* 去除副标题特殊样式 */
 h2 {
-  font-size: 18px;
+  font-size: 25px;
   color: #666;
   margin: 0 0 1.5rem;
 }
 
 /* 段落 */
 p {
-  font-size: 15px;
+  font-size: 18px;
   color: #444;
   font-family: 'Noto Serif SC', serif;
 }
