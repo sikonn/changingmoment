@@ -1,44 +1,56 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-const { frontmatter } = Astro.props;
+
+const {
+  frontmatter: {
+    title = '未命名文章',
+    description = '',
+    pubDate = '',
+    tags = [],
+    wordCount = 0,
+    readTime = 0,
+  },
+} = Astro.props;
 ---
-<BaseLayout pageTitle={frontmatter.title}>
-  <p><em>{frontmatter.description}</em></p>
+<BaseLayout pageTitle={title}>
+  {description && <p><em>{description}</em></p>}
+  
   <p class="post-meta">
-    <span>{frontmatter.pubDate.toString().slice(0, 10)}</span>
-    <span>· {frontmatter.tags}</span>
-    <span>· {frontmatter.wordCount}字</span>
-    <span>· 预计阅读{frontmatter.readTime}分钟</span>
+    <span>{pubDate.toString().slice(0, 10)}</span>
+    {tags.length > 0 && <span>· {tags.join(', ')}</span>}
+    <span>· {wordCount}字</span>
+    <span>· 预计阅读{readTime}分钟</span>
   </p>
-  <slot />
+
+  <article class="post-content">
+    <slot />
+  </article>
 </BaseLayout>
 
 <style>
-  .page-title {
-  font-size: 2em;
-  font-weight: 700;
-}
-
-  /* 图片适应父容器宽度 */
-  img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* 正文字体不加粗 */
-  body {
-    font-weight: normal; /* 禁用加粗 */
-  }
-
-  /* 字数显示的样式 */
-  p span {
+  .post-meta {
+    margin-bottom: 1em;
     font-size: 0.9em;
     color: #888;
+  }
+
+  .post-meta span {
     margin-left: 1em;
   }
 
-  .post-meta {
-  margin-bottom: 1em;
-}
+  .post-meta span:first-child {
+    margin-left: 0;
+  }
+
+  .post-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em 0;
+  }
+
+  .post-content {
+    font-weight: normal;
+    line-height: 1.75;
+  }
 </style>
