@@ -67,25 +67,57 @@ body {
   font-family: 'Noto Serif SC', serif;
 }
 
-/* 主标题 */
+/* 主标题 h1 */
 h1 {
-  font-size: 35px;
-  color: #4a4a4a;
-  margin: 1.5rem 0 0.5rem;
+  font-size: 2rem;
+  color: #333;
+  margin: 2rem 0 1rem;
+  font-weight: 700;
+  transition: color 0.3s ease;
+  position: relative;
+  cursor: pointer;
 }
 
-/* 去除副标题特殊样式 */
+h1:hover {
+  color: #ff6b81;
+}
+
+/* 副标题 h2 */
 h2 {
-  font-size: 25px;
-  color: #666;
-  margin: 0 0 1.5rem;
+  font-size: 1.8rem;
+  color: #444;
+  margin: 1.5rem 0 1rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  position: relative;
+  cursor: pointer;
 }
 
-/* 段落 */
+h2:hover {
+  color: #bd48ec;
+}
+
+/* 小标题 h3 */
+h3 {
+  font-size: 1.5rem;
+  color: #555;
+  margin: 1.5rem 0 0.75rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+h3:hover {
+  color: #0984e3;
+}
+
+/* 段落文字样式 */
 p {
-  font-size: 18px;
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.8;
   color: #444;
   font-family: 'Noto Serif SC', serif;
+  margin-bottom: 1.5rem;
 }
 
 /* 强调（英文或数字） */
@@ -368,4 +400,34 @@ iframe {
 
 h1.page-title {
   font-size: 2rem;
+}
+
+/* 引用块 - 便签纸风格 */
+blockquote {
+  background: #fff0f6; /* 淡淡粉色背景 */
+  padding: 1rem 1rem;
+  margin: 0 0 8px 0;  /* 这里把底部margin调小，比如8px或者更小 */
+  color: #6b4c4c;
+  box-shadow:
+    2px 2px 5px rgba(0, 0, 0, 0.1),
+    inset 0 0 10px #ffe6eb; /* 内阴影，营造纸质感 */
+  border-radius: 8px;
+  position: relative;
+  font-family: 'Georgia', serif;
+  transition: box-shadow 0.3s ease;
+  cursor: default;
+  padding-bottom: 8px;  /* 适当减少内边距 *
+  margin-bottom: 0;     /* 取消外边距 */
+}
+
+/* 引用块悬停时稍微亮一点 */
+blockquote:hover {
+  box-shadow:
+    3px 3px 10px rgba(0, 0, 0, 0.15),
+    inset 0 0 12px #ffd1d9;
+}
+blockquote > *:last-child {
+  margin-bottom: 0;     /* 去掉最后一个子元素的底部外边距 */
+  padding-bottom: 0;    /* 去掉最后一个子元素的底部内边距 */
+  line-height: 2;     /* 适当调整行高 */
 }
