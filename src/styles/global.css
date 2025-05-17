@@ -258,3 +258,25 @@ code,
   color: #444;
 }
 
+/* 全局链接颜色调整为浅粉 */
+a {
+  color: #f8b6c2; /* 浅粉色 */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #f08a99; /* 悬停时略深一点的粉色 */
+  text-decoration: underline;
+}
+
+/* 嵌入视频自适应容器宽度 */
+iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9; /* 维持16:9比例 */
+  display: block;
+  border: none;
+  border-radius: 8px;
+  margin: 1rem 0;
+}

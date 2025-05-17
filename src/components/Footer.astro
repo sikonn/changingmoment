@@ -1,11 +1,18 @@
 ---
-// Astro 计算逻辑保持不变
 const platform = "mastodon";
 const username = "food";
 const startDate = new Date("2022-04-27");
 const today = new Date();
 const diffTime = today.getTime() - startDate.getTime();
 const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+const posts = await Astro.glob('../pages/posts/**/*.md');
+
+// 简单统计字数（使用 frontmatter 中的 wordCount，如果有）
+const totalWordCount = posts.reduce((sum, post) => {
+  return sum + (post.frontmatter.wordCount ?? 0);
+}, 0);
+// ⭐️ 格式化字数为 K 字符串（保留 1 位小数）
+const formattedWordCount = (totalWordCount / 1000).toFixed(1) + 'k';
 ---
 <style>
   footer {
@@ -25,6 +32,5 @@ const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 </style>
 
 <footer>
-  <p>2022–2025｜all rights reserved｜{diffDays} days!</p>
-</p>
+  <p>2022–2025｜all rights reserved｜嘟嘟了 {formattedWordCount} 字｜{diffDays} days!</p>
 </footer>
