@@ -281,48 +281,43 @@ iframe {
   margin: 1rem 0;
 }
 
-.db-card-wrapper {
-  background-color: rgba(255, 182, 193, 0.2); /* 半透明浅粉色背景 */
-  border: 2px dashed #ffb6c1;                /* 浅粉色虚线边框 */
-  border-radius: 16px;                        /* 较大的圆角 */
-  padding: 6px;                              /* 留出空间显示边框和背景 */
-  margin: 1rem 0;
-}
-
 .db-card {
   display: flex;
+  height: 180px; /* 固定高度 */
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 0 12px rgba(0,0,0,0.1);
-  border: 1px solid #eee;
-  background: #fff;
+  border: 2px dashed rgba(255, 219, 224, 0.6); /* 浅粉色虚线边框 */
+  margin: 1rem 0;
+  background: rgba(241, 228, 233, 0.5); /* 浅粉半透明背景 */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease;
 }
 
 .db-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .db-card-subject {
   display: flex;
-  align-items: flex-start;
   width: 100%;
   color: inherit;
-  text-decoration: none;
 }
 
 .db-card-post {
   flex-shrink: 0;
+  height: 100%; /* 高度 = 卡片高度 */
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
 }
 
 .db-card-post img {
-  height: 150px;
-  width: auto;
-  object-fit: contain;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
-  background-color: #f9f9f9;
+  height: 100%;          /* 图片高度 = 卡片高度 */
+  width: auto;           /* 宽度按比例适应 */
+  object-fit: contain;   /* 保持图片比例，不裁剪 */
+  display: block;
 }
 
 .db-card-content {
@@ -330,6 +325,7 @@ iframe {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 0.3rem;
 }
 
@@ -341,8 +337,7 @@ iframe {
 
 .rating {
   font-weight: 600;
-  font-size: 0.9rem;
-  color: #f39c12;
+  font-size: 0.95rem;
   margin-top: 0.2rem;
 }
 
@@ -356,15 +351,17 @@ iframe {
 @media (max-width: 600px) {
   .db-card {
     flex-direction: column;
+    height: auto;
+  }
+
+  .db-card-post {
+    width: 100%;
+    height: auto;
+    justify-content: center;
   }
 
   .db-card-post img {
     width: 100%;
     height: auto;
-    border-radius: 0;
-  }
-
-  .db-card-content {
-    padding: 1rem;
   }
 }

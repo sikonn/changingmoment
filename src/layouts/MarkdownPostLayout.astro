@@ -4,7 +4,7 @@ const { frontmatter } = Astro.props;
 ---
 <BaseLayout pageTitle={frontmatter.title}>
   <p><em>{frontmatter.description}</em></p>
-  <p>
+  <p class="post-meta">
     <span>{frontmatter.pubDate.toString().slice(0, 10)}</span>
     <span>· {frontmatter.tags}</span>
     <span>· {frontmatter.wordCount}字</span>
@@ -19,6 +19,7 @@ const { frontmatter } = Astro.props;
     font-weight: 700;
     margin-bottom: 0.5em;
   }
+
   /* 图片适应父容器宽度 */
   img {
     width: 100%;
@@ -37,4 +38,8 @@ const { frontmatter } = Astro.props;
     color: #888;
     margin-left: 1em;
   }
+
+  .post-meta {
+  margin-bottom: 1em;
+}
 </style>
