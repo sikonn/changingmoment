@@ -2,10 +2,9 @@
 title: 建站快乐 | Start
 layout: ../../layouts/MarkdownPostLayout.astro
 pubDate: 2022-04-27
-wordCount: 2102
-readTime: 7
+wordCount: 282
+readTime: 1
 tags:
-  - 坠落天边的快乐碎片
   - 天天的快乐日记
 lastmod: 2022-06-28T01:00:02.773Z
 ---
