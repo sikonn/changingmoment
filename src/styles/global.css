@@ -365,3 +365,7 @@ iframe {
     height: auto;
   }
 }
+
+h1.page-title {
+  font-size: 2rem;
+}
