@@ -56,15 +56,60 @@ body {
   margin: 1rem 0;
 }
 
-/* 标题统一风格 */
 .container h1,
 .container h2,
 .container h3,
 .container h4,
 .container h5,
 .container h6 {
-  font-weight: normal;
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'Baloo 2', 'Noto Sans SC', cursive, sans-serif;
+  font-weight: 700;
+  color: #ff6f91; /* 粉红色系，甜美可爱 */
+  margin: 1.5rem 0 1rem;
+}
+
+/* 各级标题分别设置大小、装饰 */
+.container h1 {
+  font-size: 2.5rem;
+  border-bottom: 4px dotted #ffb6c1;
+  padding-bottom: 0.3rem;
+}
+
+.container h2 {
+  font-size: 2rem;
+  background-color: #ffe4ec;
+  padding: 0.3rem 0.6rem;
+  border-left: 6px solid #ff6f91;
+  border-radius: 8px;
+}
+
+.container h3 {
+  font-size: 1.6rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+.container h3::before {
+  content: '🍓';
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.container h4 {
+  font-size: 1.4rem;
+  color: #f08080;
+  font-weight: 600;
+}
+
+.container h5 {
+  font-size: 1.2rem;
+  color: #ffa07a;
+}
+
+.container h6 {
+  font-size: 1rem;
+  color: #ffb6c1;
+  font-style: italic;
 }
 
 /* 主标题 h1 */
