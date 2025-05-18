@@ -2,9 +2,14 @@
 import BaseLayout from './BaseLayout.astro';
 const { frontmatter } = Astro.props;
 const { title, description, pubDate, tags, wordCount, readTime } = frontmatter;
+// 自动生成 slug
+const slug = Astro.url.pathname.split('/').filter(Boolean).pop();
+frontmatter.slug = slug;
+// 设置默认 image，如果 frontmatter.image 没写就自动设为 og/slug.png
+frontmatter.image = frontmatter.image || 'https://changingmoments.one/favicon.ico';
 ---
 
-<BaseLayout>
+<BaseLayout frontmatter={frontmatter}>
   <h1 class="page-title">{title}</h1>
   {description && <p><em>{description}</em></p>}
   <p class="post-meta">
