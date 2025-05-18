@@ -5,13 +5,13 @@ import BlogPost from '../../components/BlogPost.astro';
 export async function getStaticPaths() {
   const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true }));
 
-  // 只取非 hidden 的文章用于生成 tag 页面
+  // 过滤掉 hidden: true 的文章
   const visiblePosts = allPosts.filter((post: any) => !post.frontmatter.hidden);
 
-  // 获取所有 tag 并去重
+  // 获取所有 tag，并去重
   const uniqueTags = [...new Set(visiblePosts.map((post: any) => post.frontmatter.tags).flat())];
 
-  // 按 tag 生成页面
+  // 生成每个 tag 页面的路径和内容
   return uniqueTags.map((tag) => {
     const filteredPosts = visiblePosts.filter((post: any) =>
       post.frontmatter.tags.includes(tag)
@@ -29,13 +29,18 @@ const { posts } = Astro.props;
 
 <BaseLayout pageTitle={tag}>
   <p>Posts tagged with <strong>{tag}</strong></p>
-  <ul>
-    {posts.map((post: any) => (
-      <BlogPost
-        url={post.url}
-        title={post.frontmatter.title}
-        pubDate={post.frontmatter.pubDate}
-      />
-    ))}
-  </ul>
+
+  {posts.length === 0 ? (
+    <p>该标签暂无公开文章。</p>
+  ) : (
+    <ul>
+      {posts.map((post: any) => (
+        <BlogPost
+          url={post.url}
+          title={post.frontmatter.title}
+          pubDate={post.frontmatter.pubDate}
+        />
+      ))}
+    </ul>
+  )}
 </BaseLayout>
