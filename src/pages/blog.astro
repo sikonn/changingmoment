@@ -33,7 +33,7 @@ const pageTitle = "Blog";
 
   {sortedYears.map((year) => (
     <section>
-      <h2>{year}（{postsByYear[year].length} 篇）</h2>
+      <h2>{year}</h2>
       <ul>
         {postsByYear[year].map((post) => (
           <BlogPost
