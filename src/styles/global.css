@@ -56,38 +56,53 @@ body {
   margin: 1rem 0;
 }
 
+.container {
+  font-family: 'Noto Serif SC', serif;
+  color: #333;
+  line-height: 1.75;
+}
+
+/* 各级标题样式 */
 .container h1 {
   font-size: 2.2rem;
+  margin: 2rem 0 1rem;
 }
 
 .container h2 {
   font-size: 1.8rem;
+  margin: 1.8rem 0 1rem;
 }
 
 .container h3 {
   font-size: 1.5rem;
+  margin: 1.6rem 0 0.8rem;
 }
 
-.container h4 {
+.container h4,
+.container h5,
+.container h6 {
   font-size: 1.2rem;
+  margin: 1.4rem 0 0.6rem;
+  font-weight: normal;
 }
 
-.container h5 {
+/* 段落间距 */
+.container p {
+  margin: 1rem 0;
   font-size: 1rem;
 }
 
-.container h6 {
-  font-size: 0.9rem;
-}
-
+/* 鼠标悬停标题变粉色 */
 .container h1:hover,
 .container h2:hover,
 .container h3:hover,
 .container h4:hover,
 .container h5:hover,
 .container h6:hover {
-  color: #f4a7b9; /* 淡粉色，可爱又不张扬 */
+  color: #f4a7b9; /* 淡粉色 */
+  transition: color 0.3s ease;
 }
+
 
 /* 主标题 h1 */
 h1 {
