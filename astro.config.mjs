@@ -14,9 +14,8 @@ import { remarkModifiedTime } from './src/components/mdrenders/remark-modified-t
 
 import astroExpressiveCode from 'astro-expressive-code'
 
-// https://astro.build/config
 export default defineConfig({
-  site: SITE_URL,
+  site: 'https://changingmoments.one', // ✅ 请替换为你自己的域名
   build: {
     format: "file",
   },
