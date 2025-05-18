@@ -2,7 +2,11 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import "../styles/global.css";
-const { pageTitle } = Astro.props;
+
+const {
+  pageTitle,
+  image = "/favicon.ico"  // 设置一个默认图
+} = Astro.props;
 ---
 <html lang="zh-cn">
   <head>
@@ -12,8 +16,19 @@ const { pageTitle } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
 
-    <!-- ✅ 加上这行 -->
+    <!-- 字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC&family=VT323&display=swap" rel="stylesheet" />
+
+    <!-- ✅ Open Graph -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={`https://你的域名${Astro.url.pathname}`} />
+    <meta property="og:image" content={image} />
+
+    <!-- ✅ Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:image" content={image} />
   </head>
   <body>
     <div class="container">
