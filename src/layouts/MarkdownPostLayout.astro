@@ -30,35 +30,43 @@ const fullUrl = (url?.pathname)
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
   </head>
+  <body>
+    <BaseLayout>
+      <h1 class="page-title">{title}</h1>
+      {description && <p><em>{description}</em></p>}
+      <p class="post-meta">
+        <span>{pubDate.toString().slice(0, 10)}</span>
+        {tags && <span>· {tags.join(', ')}</span>}
+        <span>· {wordCount}字</span>
+        <span>· 预计阅读{readTime}分钟</span>
+      </p>
+      <article class="post-content">
+        <slot />
+      </article>
+    </BaseLayout>
+  </body>
 
-  <h1 class="page-title">{title}</h1>
-  {description && <p><em>{description}</em></p>}
-  <p class="post-meta">
-    <span>{pubDate.toString().slice(0, 10)}</span>
-  </p>
-  <slot />
-</BaseLayout>
+  <style>
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
 
-<style>
-  .page-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
+    .post-meta span {
+      font-size: 0.9em;
+      color: #888;
+      margin-left: 1em;
+    }
 
-  .post-meta span {
-    font-size: 0.9em;
-    color: #888;
-    margin-left: 1em;
-  }
+    .post-meta {
+      margin-bottom: 1.5rem;
+    }
 
-  .post-meta {
-    margin-bottom: 1.5rem;
-  }
-
-  img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-</style>
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+</html>
