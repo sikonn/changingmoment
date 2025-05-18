@@ -1,0 +1,15 @@
+---
+import PostLayout from '../../layouts/MarkdownPostLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Markdown from '@astrojs/markdown-remark';
+const { Content, frontmatter } = Astro.props;
+
+// 自动生成 slug
+const slug = Astro.url.pathname.split('/').filter(Boolean).pop();
+frontmatter.slug = slug;
+---
+<BaseLayout frontmatter={frontmatter}>
+  <PostLayout frontmatter={frontmatter}>
+    <Content />
+  </PostLayout>
+</BaseLayout>

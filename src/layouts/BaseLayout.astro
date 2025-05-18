@@ -2,7 +2,14 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import "../styles/global.css";
-const { pageTitle } = Astro.props;
+
+const { pageTitle, frontmatter = {} } = Astro.props;
+const {
+  title = pageTitle,
+  description = '记录一些转瞬即逝的感受',
+  slug = '',
+  image = '/og-default.png'
+} = frontmatter;
 ---
 <html lang="zh-cn">
   <head>
@@ -10,9 +17,22 @@ const { pageTitle } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
+    <title>{title}</title>
+    <meta name="description" content={description} />
 
-    <!-- ✅ 加上这行 -->
+    <!-- ✅ Open Graph & Twitter Card meta -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={`https://changingmoments.one/posts/${slug}`} />
+    <meta property="og:image" content={`https://changingmoments.one${image}`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`https://changingmoments.one${image}`} />
+
+    <!-- 字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC&family=VT323&display=swap" rel="stylesheet" />
   </head>
   <body>
