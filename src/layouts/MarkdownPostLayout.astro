@@ -1,43 +1,80 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-const { frontmatter } = Astro.props;
-const { title, description, pubDate, tags, wordCount, readTime } = frontmatter;
+
+const { frontmatter, url } = Astro.props;
+const {
+  title,
+  description = "欢迎阅读我的文章，这里是一些有趣的思考与记录。",
+  pubDate,
+  tags,
+  wordCount,
+  readTime,
+  image = "https://你的域名/images/default.jpg", // 默认封面图
+} = frontmatter;
+
+// 构造完整 URL（需要在 astro.config.mjs 中配置 site）
+const fullUrl = new URL(url.pathname, Astro.site).toString();
 ---
 
-<BaseLayout>
-  <h1 class="page-title">{title}</h1>
-  {description && <p><em>{description}</em></p>}
-  <p class="post-meta">
-    <span>{pubDate.toString().slice(0, 10)}</span>
-    {tags && <span>· {tags.join(', ')}</span>}
-    <span>· {wordCount}字</span>
-    <span>· 预计阅读{readTime}分钟</span>
-  </p>
-  <article class="post-content">
-    <slot />
-  </article>
-</BaseLayout>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
 
-<style>
-.page-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={fullUrl} />
+    <meta property="og:type" content="article" />
 
-.post-meta span {
-  font-size: 0.9em;
-  color: #888;
-  margin-left: 1em;
-}
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
 
-.post-meta {
-  margin-bottom: 1.5rem;
-}
+    <!-- 可选 favicon -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <BaseLayout>
+      <h1 class="page-title">{title}</h1>
+      {description && <p><em>{description}</em></p>}
+      <p class="post-meta">
+        <span>{pubDate.toString().slice(0, 10)}</span>
+        {tags && <span>· {tags.join(', ')}</span>}
+        <span>· {wordCount}字</span>
+        <span>· 预计阅读{readTime}分钟</span>
+      </p>
+      <article class="post-content">
+        <slot />
+      </article>
+    </BaseLayout>
+  </body>
 
-img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-</style>
+  <style>
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .post-meta span {
+      font-size: 0.9em;
+      color: #888;
+      margin-left: 1em;
+    }
+
+    .post-meta {
+      margin-bottom: 1.5rem;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+</html>
