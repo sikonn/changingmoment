@@ -8,19 +8,22 @@ export async function getStaticPaths() {
   // 过滤掉 hidden: true 的文章
   const visiblePosts = allPosts.filter((post: any) => !post.frontmatter.hidden);
 
-  // 获取所有 tag，并去重
-  const uniqueTags = [...new Set(visiblePosts.map((post: any) => post.frontmatter.tags).flat())];
+  // 提取所有 tag，并生成 tag -> 对应文章 的映射
+  const tagMap = new Map<string, any[]>();
 
-  // 生成每个 tag 页面的路径和内容
-  return uniqueTags.map((tag) => {
-    const filteredPosts = visiblePosts.filter((post: any) =>
-      post.frontmatter.tags.includes(tag)
-    );
-    return {
-      params: { tag },
-      props: { posts: filteredPosts },
-    };
-  });
+  for (const post of visiblePosts) {
+    const tags = post.frontmatter.tags || [];
+    for (const tag of tags) {
+      if (!tagMap.has(tag)) tagMap.set(tag, []);
+      tagMap.get(tag)?.push(post);
+    }
+  }
+
+  // 只生成有公开文章的 tag 页面
+  return Array.from(tagMap.entries()).map(([tag, posts]) => ({
+    params: { tag },
+    props: { posts },
+  }));
 }
 
 const { tag } = Astro.params;
@@ -29,18 +32,13 @@ const { posts } = Astro.props;
 
 <BaseLayout pageTitle={tag}>
   <p>Posts tagged with <strong>{tag}</strong></p>
-
-  {posts.length === 0 ? (
-    <p>该标签暂无公开文章。</p>
-  ) : (
-    <ul>
-      {posts.map((post: any) => (
-        <BlogPost
-          url={post.url}
-          title={post.frontmatter.title}
-          pubDate={post.frontmatter.pubDate}
-        />
-      ))}
-    </ul>
-  )}
+  <ul>
+    {posts.map((post: any) => (
+      <BlogPost
+        url={post.url}
+        title={post.frontmatter.title}
+        pubDate={post.frontmatter.pubDate}
+      />
+    ))}
+  </ul>
 </BaseLayout>
