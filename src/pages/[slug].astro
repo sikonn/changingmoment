@@ -1,0 +1,71 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const postsDir = path.resolve('./src/pages/posts');
+  const files = fs.readdirSync(postsDir).filter(file => file.endsWith('.md'));
+
+  const paths = files.map(file => ({
+    params: { slug: file.replace('.md', '') }
+  }));
+
+  return { paths };
+}
+
+const { slug } = Astro.params;
+const filePath = path.resolve(`./src/pages/posts/${slug}.md`);
+
+if (!fs.existsSync(filePath)) {
+  throw new Error(`Markdown file not found: ${slug}.md`);
+}
+
+const rawContent = fs.readFileSync(filePath, 'utf-8');
+
+// 提取 frontmatter
+const frontmatterMatch = rawContent.match(/^---\n([\s\S]*?)\n---/);
+let frontmatter = {};
+let body = rawContent;
+
+if (frontmatterMatch) {
+  const yaml = frontmatterMatch[1];
+  body = rawContent.replace(frontmatterMatch[0], '');
+  yaml.split('\n').forEach(line => {
+    const [key, ...rest] = line.split(':');
+    frontmatter[key.trim()] = rest.join(':').trim();
+  });
+}
+
+const title = frontmatter.title || slug;
+const description = frontmatter.description || '';
+const pubDate = frontmatter.pubDate || '';
+const image = frontmatter.image || '/default-og-image.jpg';
+
+const htmlContent = marked.parse(body);
+const pageUrl = new URL(`/posts/${slug}`, Astro.site).toString();
+---
+
+<BaseLayout title={title} description={description} image={image} pubDate={pubDate} url={pageUrl}>
+  <h1 class="page-title">{title}</h1>
+  <p class="post-meta">{pubDate}</p>
+  <article class="post-content" set:html={htmlContent} />
+</BaseLayout>
+
+<style>
+.page-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.post-meta {
+  font-size: 0.9em;
+  color: #888;
+  margin-bottom: 1.5rem;
+}
+.post-content img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+</style>
