@@ -6,17 +6,25 @@ const {
   title,
   description,
   pubDate,
-  image = '/default-og-image.jpg',
+  tags,
+  wordCount,
+  readTime,
+  image,
 } = frontmatter;
 
 // 构造完整 URL（需要在 astro.config.mjs 中配置 site）
 const fullUrl = (url?.pathname)
   ? new URL(url.pathname, Astro.site).toString()
   : Astro.site;
+
 ---
 
-<BaseLayout>
+<html lang="zh">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -29,6 +37,9 @@ const fullUrl = (url?.pathname)
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
+
+    <!-- 可选 favicon -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
   <body>
     <BaseLayout>
