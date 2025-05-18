@@ -358,7 +358,7 @@ iframe {
   border: 2px dashed rgba(255, 219, 224, 0.6); /* 浅粉色虚线边框 */
   margin: 1rem 0;
   background: rgba(241, 228, 233, 0.5); /* 浅粉半透明背景 */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Noto Serif SC', serif;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease;
 }

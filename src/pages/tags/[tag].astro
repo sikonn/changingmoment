@@ -2,24 +2,36 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogPost from '../../components/BlogPost.astro';
 
+type Post = {
+  frontmatter: {
+    title: string;
+    pubDate: string;
+    tags?: string[];
+    hidden?: boolean;
+  };
+  url: string;
+};
+
 export async function getStaticPaths() {
-  const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true }));
+  const allPostImports = import.meta.glob('../posts/*.md', { eager: true });
+  const allPosts = Object.values(allPostImports) as Post[];
 
   // 过滤掉 hidden: true 的文章
-  const visiblePosts = allPosts.filter((post: any) => !post.frontmatter.hidden);
+  const visiblePosts = allPosts.filter((post) => !post.frontmatter.hidden);
 
-  // 提取所有 tag，并生成 tag -> 对应文章 的映射
-  const tagMap = new Map<string, any[]>();
-
+  // 提取所有标签并生成标签到文章的映射
+  const tagMap = new Map<string, Post[]>();
   for (const post of visiblePosts) {
     const tags = post.frontmatter.tags || [];
     for (const tag of tags) {
-      if (!tagMap.has(tag)) tagMap.set(tag, []);
+      if (!tagMap.has(tag)) {
+        tagMap.set(tag, []);
+      }
       tagMap.get(tag)?.push(post);
     }
   }
 
-  // 只生成有公开文章的 tag 页面
+  // 仅为包含公开文章的标签生成页面
   return Array.from(tagMap.entries()).map(([tag, posts]) => ({
     params: { tag },
     props: { posts },
@@ -31,9 +43,9 @@ const { posts } = Astro.props;
 ---
 
 <BaseLayout pageTitle={tag}>
-  <p>Posts tagged with <strong>{tag}</strong></p>
+  <p>标签：<strong>{tag}</strong></p>
   <ul>
-    {posts.map((post: any) => (
+    {posts.map((post) => (
       <BlogPost
         url={post.url}
         title={post.frontmatter.title}
