@@ -1,7 +1,8 @@
 ---
+// layouts/MarkdownPostLayout.astro
 import BaseLayout from './BaseLayout.astro';
 
-const { frontmatter, url } = Astro.props;
+const { frontmatter } = Astro.props;
 const {
   title,
   description,
@@ -9,53 +10,21 @@ const {
   tags,
   wordCount,
   readTime,
-  image,
 } = frontmatter;
-
-// 构造完整 URL（需要在 astro.config.mjs 中配置 site）
-const fullUrl = (url?.pathname)
-  ? new URL(url.pathname, Astro.site).toString()
-  : Astro.site;
-
 ---
 
-<html lang="zh">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-
-    <!-- Open Graph -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
-    <meta property="og:url" content={fullUrl} />
-    <meta property="og:type" content="article" />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
-
-    <!-- 可选 favicon -->
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  </head>
-  <body>
-    <BaseLayout>
-      <h1 class="page-title">{title}</h1>
-      {description && <p><em>{description}</em></p>}
-      <p class="post-meta">
-        <span>{pubDate.toString().slice(0, 10)}</span>
-        {tags && <span>· {tags.join(', ')}</span>}
-        <span>· {wordCount}字</span>
-        <span>· 预计阅读{readTime}分钟</span>
-      </p>
-      <article class="post-content">
-        <slot />
-      </article>
-    </BaseLayout>
-  </body>
+<BaseLayout>
+  <h1 class="page-title">{title}</h1>
+  {description && <p><em>{description}</em></p>}
+  <p class="post-meta">
+    <span>{pubDate.toString().slice(0, 10)}</span>
+    {tags && <span>· {tags.join(', ')}</span>}
+    <span>· {wordCount}字</span>
+    <span>· 预计阅读{readTime}分钟</span>
+  </p>
+  <article class="post-content">
+    <slot />
+  </article>
 
   <style>
     .page-title {
@@ -80,4 +49,4 @@ const fullUrl = (url?.pathname)
       display: block;
     }
   </style>
-</html>
+</BaseLayout>

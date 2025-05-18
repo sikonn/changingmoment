@@ -24,7 +24,7 @@ if (!fs.existsSync(filePath)) {
 
 const rawContent = fs.readFileSync(filePath, 'utf-8');
 
-// --- 解析 frontmatter ---
+// --- 1. 提取 frontmatter ---
 const frontmatterMatch = rawContent.match(/^---\n([\s\S]*?)\n---/);
 let frontmatter = {};
 let body = rawContent;
@@ -38,13 +38,21 @@ if (frontmatterMatch) {
   });
 }
 
-// 默认字段处理
+// --- 2. 设置默认字段 ---
 const title = frontmatter.title || slug;
 const description = frontmatter.description || '';
 const pubDate = frontmatter.pubDate || '';
 const image = frontmatter.image || '/default-og-image.jpg';
+const tags = frontmatter.tags?.split(',').map(t => t.trim()) || [];
+const readTime = Math.ceil(body.split(/\s+/).length / 400);
+const wordCount = body.split(/\s+/).length;
 
+// --- 3. Markdown 转 HTML ---
 const htmlContent = marked.parse(body);
+
+// --- 4. 页面路径（用于分享）---
+const pageUrl = new URL(`/posts/${slug}`, Astro.site);
+
 ---
 
 <MarkdownPostLayout
@@ -52,9 +60,12 @@ const htmlContent = marked.parse(body);
     title,
     description,
     pubDate,
+    tags,
+    readTime,
+    wordCount,
     image
   }}
-  url={Astro.url}  <!-- 关键传入 -->
->
-  <article class="post-content" innerHTML={htmlContent} />
-</MarkdownPostLayout>
+  url={pageUrl}
+/>
+
+<article class="post-content" set:html={htmlContent} />
