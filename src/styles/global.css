@@ -56,60 +56,37 @@ body {
   margin: 1rem 0;
 }
 
-.container h1,
-.container h2,
-.container h3,
-.container h4,
-.container h5,
-.container h6 {
-  font-family: 'Baloo 2', 'Noto Sans SC', cursive, sans-serif;
-  font-weight: 700;
-  color: #ff6f91; /* 粉红色系，甜美可爱 */
-  margin: 1.5rem 0 1rem;
-}
-
-/* 各级标题分别设置大小、装饰 */
 .container h1 {
-  font-size: 2.5rem;
-  border-bottom: 4px dotted #ffb6c1;
-  padding-bottom: 0.3rem;
+  font-size: 2.2rem;
 }
 
 .container h2 {
-  font-size: 2rem;
-  background-color: #ffe4ec;
-  padding: 0.3rem 0.6rem;
-  border-left: 6px solid #ff6f91;
-  border-radius: 8px;
+  font-size: 1.8rem;
 }
 
 .container h3 {
-  font-size: 1.6rem;
-  position: relative;
-  padding-left: 1.5rem;
-}
-.container h3::before {
-  content: '🍓';
-  position: absolute;
-  left: 0;
-  top: 0;
+  font-size: 1.5rem;
 }
 
 .container h4 {
-  font-size: 1.4rem;
-  color: #f08080;
-  font-weight: 600;
+  font-size: 1.2rem;
 }
 
 .container h5 {
-  font-size: 1.2rem;
-  color: #ffa07a;
+  font-size: 1rem;
 }
 
 .container h6 {
-  font-size: 1rem;
-  color: #ffb6c1;
-  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.container h1:hover,
+.container h2:hover,
+.container h3:hover,
+.container h4:hover,
+.container h5:hover,
+.container h6:hover {
+  color: #f4a7b9; /* 淡粉色，可爱又不张扬 */
 }
 
 /* 主标题 h1 */
