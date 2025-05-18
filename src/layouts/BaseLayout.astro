@@ -2,11 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import "../styles/global.css";
-
-const {
-  pageTitle,
-  image = "/favicon.ico"  // 设置一个默认图
-} = Astro.props;
+const { pageTitle } = Astro.props;
 ---
 <html lang="zh-cn">
   <head>
@@ -16,19 +12,8 @@ const {
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
 
-    <!-- 字体 -->
+    <!-- ✅ 加上这行 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC&family=VT323&display=swap" rel="stylesheet" />
-
-    <!-- ✅ Open Graph -->
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content={`https://changingmoments.one${Astro.url.pathname}`} />
-    <meta property="og:image" content={image} />
-
-    <!-- ✅ Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:image" content={image} />
   </head>
   <body>
     <div class="container">

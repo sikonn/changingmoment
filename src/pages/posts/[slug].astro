@@ -1,8 +1,9 @@
 ---
 import fs from 'node:fs';
 import path from 'node:path';
-import BaseLayout from '../../layouts/BaseLayout.astro';
 import { marked } from 'marked';
+import MarkdownPostLayout from '../../layouts/MarkdownPostLayout.astro';
+
 export const prerender = true;
 
 export async function getStaticPaths() {
@@ -23,7 +24,7 @@ if (!fs.existsSync(filePath)) {
 
 const rawContent = fs.readFileSync(filePath, 'utf-8');
 
-// 提取 frontmatter
+// --- 解析 frontmatter ---
 const frontmatterMatch = rawContent.match(/^---\n([\s\S]*?)\n---/);
 let frontmatter = {};
 let body = rawContent;
@@ -37,11 +38,23 @@ if (frontmatterMatch) {
   });
 }
 
+// 默认字段处理
 const title = frontmatter.title || slug;
 const description = frontmatter.description || '';
 const pubDate = frontmatter.pubDate || '';
 const image = frontmatter.image || '/default-og-image.jpg';
 
 const htmlContent = marked.parse(body);
-const pageUrl = new URL(`/posts/${slug}`, Astro.site).toString();
 ---
+
+<MarkdownPostLayout
+  frontmatter={{
+    title,
+    description,
+    pubDate,
+    image
+  }}
+  url={Astro.url}  <!-- 关键传入 -->
+>
+  <article class="post-content" innerHTML={htmlContent} />
+</MarkdownPostLayout>
