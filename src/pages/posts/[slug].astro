@@ -1,15 +1,34 @@
 ---
 import PostLayout from '../../layouts/MarkdownPostLayout.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Markdown from '@astrojs/markdown-remark';
+import MarkdownPostLayout from '../../layouts/MarkdownPostLayout.astro';
+
 const { Content, frontmatter } = Astro.props;
 
-// 自动生成 slug
+// 从 URL 里获取 slug
 const slug = Astro.url.pathname.split('/').filter(Boolean).pop();
+
+// 给 frontmatter 添加 slug 字段（方便后续用）
 frontmatter.slug = slug;
+
+// 构建动态路由所需，告诉 Astro 预渲染哪些页面
+export async function getStaticPaths() {
+  // 使用 import.meta.glob 读取所有 Markdown 文件（路径相对当前文件）
+  const posts = import.meta.glob('./*.md');
+
+  const paths = [];
+
+  for (const path in posts) {
+    const slug = path.split('/').pop().replace('.md', '');
+    paths.push({ params: { slug } });
+  }
+
+  return paths;
+}
 ---
+
 <BaseLayout frontmatter={frontmatter}>
-  <PostLayout frontmatter={frontmatter}>
+  <MarkdownPostLayout frontmatter={frontmatter}>
     <Content />
-  </PostLayout>
+  </MarkdownPostLayout>
 </BaseLayout>
