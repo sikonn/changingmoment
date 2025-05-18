@@ -1,16 +1,7 @@
 ---
-// layouts/MarkdownPostLayout.astro
 import BaseLayout from './BaseLayout.astro';
-
 const { frontmatter } = Astro.props;
-const {
-  title,
-  description,
-  pubDate,
-  tags,
-  wordCount,
-  readTime,
-} = frontmatter;
+const { title, description, pubDate, tags, wordCount, readTime } = frontmatter;
 ---
 
 <BaseLayout>
@@ -25,28 +16,28 @@ const {
   <article class="post-content">
     <slot />
   </article>
-
-  <style>
-    .page-title {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-    }
-
-    .post-meta span {
-      font-size: 0.9em;
-      color: #888;
-      margin-left: 1em;
-    }
-
-    .post-meta {
-      margin-bottom: 1.5rem;
-    }
-
-    img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-  </style>
 </BaseLayout>
+
+<style>
+.page-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.post-meta span {
+  font-size: 0.9em;
+  color: #888;
+  margin-left: 1em;
+}
+
+.post-meta {
+  margin-bottom: 1.5rem;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+</style>
