@@ -2,11 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogPost from '../components/BlogPost.astro';
 
-// 过滤掉 hidden: true 的文章
-const allPosts = Object.values(
+// 所有文章（包括 hidden 的），用于统计总数
+const allPostsRaw = Object.values(
   import.meta.glob('./posts/*.md', { eager: true })
-)
-  .filter((post) => !post.frontmatter.hidden) // ← 添加这行过滤
+);
+
+// 过滤掉 hidden: true 的文章，用于显示
+const allPosts = allPostsRaw
+  .filter((post) => !post.frontmatter.hidden)
   .sort((a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime());
 
 // 分组：按年份分类
@@ -18,13 +21,15 @@ const postsByYear = allPosts.reduce((acc, post) => {
 }, {} as Record<number, any[]>);
 
 const sortedYears = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
+
 // 总文章数量（包括隐藏的）
 const totalPostsCount = allPostsRaw.length;
+
 const pageTitle = "Blog";
 ---
 
 <BaseLayout title={pageTitle}>
-  <h1>Blog</h1>
+  <h1>Blog（共 {totalPostsCount} 篇）</h1>
 
   {sortedYears.map((year) => (
     <section>
