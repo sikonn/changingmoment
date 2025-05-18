@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { marked } from 'marked';
+export const prerender = true;
 
 export async function getStaticPaths() {
   const postsDir = path.resolve('./src/pages/posts');
