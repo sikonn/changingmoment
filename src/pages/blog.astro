@@ -4,7 +4,9 @@ import BlogPost from '../components/BlogPost.astro';
 
 const allPosts = Object.values(
   import.meta.glob('./posts/*.md', { eager: true })
-).sort((a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime());
+)
+  .filter((post) => !post.frontmatter.hidden) // 过滤掉 hidden: true 的文章
+  .sort((a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime());
 
 // 分组：按年份分类
 const postsByYear = allPosts.reduce((acc, post) => {
