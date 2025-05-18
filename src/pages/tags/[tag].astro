@@ -1,31 +1,41 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogPost from '../../components/BlogPost.astro';
+
 export async function getStaticPaths() {
   const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true }));
-  const uniqueTags = [...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat())];
 
+  // 只取非 hidden 的文章用于生成 tag 页面
+  const visiblePosts = allPosts.filter((post: any) => !post.frontmatter.hidden);
+
+  // 获取所有 tag 并去重
+  const uniqueTags = [...new Set(visiblePosts.map((post: any) => post.frontmatter.tags).flat())];
+
+  // 按 tag 生成页面
   return uniqueTags.map((tag) => {
-  const filteredPosts = allPosts.filter((post: any) => post.frontmatter.tags.includes(tag));
-  return {
-    params: { tag },
-    props: { posts: filteredPosts },
-  };
-});
+    const filteredPosts = visiblePosts.filter((post: any) =>
+      post.frontmatter.tags.includes(tag)
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
 }
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
 ---
+
 <BaseLayout pageTitle={tag}>
-    <p>Posts tagged with {tag}</p>
-    <ul>
-      {posts.map((post: any) => (
-        <BlogPost
-          url={post.url}
-          title={post.frontmatter.title}
-          pubDate={post.frontmatter.pubDate}
-        />
-      ))}
-    </ul>
-  </BaseLayout>
+  <p>Posts tagged with <strong>{tag}</strong></p>
+  <ul>
+    {posts.map((post: any) => (
+      <BlogPost
+        url={post.url}
+        title={post.frontmatter.title}
+        pubDate={post.frontmatter.pubDate}
+      />
+    ))}
+  </ul>
+</BaseLayout>
