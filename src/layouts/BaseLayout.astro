@@ -40,6 +40,22 @@ const {
       <Header />
       <h1>{pageTitle}</h1>
       <slot />
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          document.querySelectorAll('img').forEach(img => {
+            img.classList.add('zoomable');
+            img.addEventListener('click', () => {
+              const overlay = document.createElement('div');
+              overlay.className = 'zoom-overlay';
+              overlay.innerHTML = `<img src="${img.src}" alt="${img.alt}" />`;
+              overlay.addEventListener('click', () => {
+                overlay.remove();
+              });
+              document.body.appendChild(overlay);
+            });
+          });
+        });
+      </script>
       <Footer />
     </div>
   </body>
