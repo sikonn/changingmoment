@@ -465,3 +465,29 @@ blockquote > *:last-child {
   padding-bottom: 0;    /* 去掉最后一个子元素的底部内边距 */
   line-height: 2;     /* 适当调整行高 */
 }
+blockquote::before,
+blockquote::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffd6e0,
+    #ffd6e0 5px,
+    #ffc0cb 5px,
+    #ffc0cb 10px
+  );
+  top: -10px;
+  transform: rotate(-3deg);
+  opacity: 0.7;
+}
+
+blockquote::before {
+  left: 10px;
+}
+
+blockquote::after {
+  right: 10px;
+  transform: rotate(5deg);
+}
