@@ -526,3 +526,29 @@ img.float-img50 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
+
+@keyframes floatBalloon {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* 向上浮动10px */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+body::after {
+  content: ""; /* 伪元素需要内容 */
+  position: fixed; /* 固定位置 */
+  bottom: 20px; /* 离底部 20px */
+  right: 20px; /* 离右侧 20px */
+  width: 73px; /* 动图宽度 */
+  height: 85px; /* 动图高度 */
+  background-image: url("https://res.stelpolva.moe/stpv/615a661f-3b7c-4ba9-b29a-f1b8eee13979.apng"); /* 动图 URL */
+  background-size: contain; /* 保持比例，但不裁剪 */
+  background-position: center; /* 图片居中 */
+  z-index: 9999; /* 确保在页面最上层 */
+  animation: floatBalloon 5s infinite ease-in-out; /* 添加动画 */
+}
