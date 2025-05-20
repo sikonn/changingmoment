@@ -40,9 +40,14 @@ const {
       <Header />
       <h1>{pageTitle}</h1>
       <slot />
+
+      <!-- ✅ 修复了 script 的闭合问题 -->
       <script>
         document.addEventListener('DOMContentLoaded', () => {
           document.querySelectorAll('img').forEach(img => {
+            // 🛑 如果是卡比图就跳过，不加放大效果
+            if (img.closest('#musicToggle')) return;
+
             img.classList.add('zoomable');
             img.addEventListener('click', () => {
               const overlay = document.createElement('div');
@@ -56,7 +61,53 @@ const {
           });
         });
       </script>
+
       <Footer />
     </div>
+
+    <!-- 卡比图标，作为控制器 -->
+    <div id="musicToggle">
+      <img src="https://res.stelpolva.moe/stpv/615a661f-3b7c-4ba9-b29a-f1b8eee13979.apng" alt="Toggle Music" width="73" height="85" />
+    </div>
+
+    <!-- 隐藏的音乐播放器 -->
+    <audio id="audioPlayer" preload="auto" src="/music/music1.m4a"></audio>
+
+    <script>
+      const audioPlayer = document.getElementById('audioPlayer');
+      const musicToggle = document.getElementById('musicToggle');
+      const totalTracks = 50;
+      let currentTrack = 1;
+      let clickCount = 0;
+      let clickTimer;
+
+      function updateTrack() {
+        const fileName = `music${currentTrack}.m4a`;
+        audioPlayer.src = `/music/${fileName}`;
+        audioPlayer.play();
+      }
+
+      musicToggle.addEventListener('click', () => {
+        clickCount++;
+        clearTimeout(clickTimer);
+
+        clickTimer = setTimeout(() => {
+          if (clickCount === 1) {
+            audioPlayer.play();
+          } else if (clickCount === 2) {
+            audioPlayer.pause();
+          } else if (clickCount === 3) {
+            currentTrack = currentTrack < totalTracks ? currentTrack + 1 : 1;
+            updateTrack();
+          }
+          clickCount = 0;
+        }, 300); // 300ms 内连续点击识别为多击
+      });
+
+      audioPlayer.addEventListener('ended', () => {
+        currentTrack = currentTrack < totalTracks ? currentTrack + 1 : 1;
+        updateTrack();
+      });
+    </script>
   </body>
 </html>
