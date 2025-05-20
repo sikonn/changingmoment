@@ -560,3 +560,151 @@ img.float-img50 {
 #audioPlayer {
   display: none;
 }
+
+/* 🌸 Waline 评论区 - 便签纸风格 🌸 */
+#waline {
+  max-width: 800px;
+  margin: 2rem auto;
+  background: #fff0f6;
+  border-radius: 12px;
+  padding: 1.5rem;
+  font-family: 'Georgia', serif;
+  box-shadow:
+    2px 2px 5px rgba(0, 0, 0, 0.1),
+    inset 0 0 10px #ffe6eb;
+  position: relative;
+  transition: box-shadow 0.3s ease;
+}
+
+/* 🩷 顶部胶带效果 */
+#waline::before,
+#waline::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffd6e0,
+    #ffd6e0 5px,
+    #ffc0cb 5px,
+    #ffc0cb 10px
+  );
+  top: -10px;
+  opacity: 0.6;
+}
+#waline::before {
+  left: 12px;
+  transform: rotate(-3deg);
+}
+#waline::after {
+  right: 12px;
+  transform: rotate(5deg);
+}
+
+/* === 2. 输入区域容器（仿便签块） === */
+.wl-input,
+.wl-editor {
+  background: #fff0f6;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow:
+    2px 2px 5px rgba(0, 0, 0, 0.1),
+    inset 0 0 10px #ffe6eb;
+  font-family: 'Georgia', serif;
+  color: #6b4c4c;
+  margin-bottom: 1rem;
+  position: relative;
+  transition: box-shadow 0.3s ease;
+}
+
+/* === 3. 输入框（昵称、邮箱、网址） === */
+.wl-input input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #f3b6c1;
+  padding: 6px;
+  width: 100%;
+  font-family: 'Georgia', serif;
+  color: #6b4c4c;
+  outline: none;
+}
+
+/* === 4. 评论文本框（textarea） === */
+.wl-editor textarea {
+  background: transparent;
+  border: none;
+  width: 100%;
+  min-height: 100px;
+  font-family: 'Georgia', serif;
+  color: #6b4c4c;
+  resize: vertical;
+  outline: none;
+}
+
+/* === 5. 提交按钮 === */
+#waline button[type="submit"],
+.wl-btn {
+  background-color: #f3b6c1;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 6px 12px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+#waline button[type="submit"]:hover,
+.wl-btn:hover {
+  background-color: #ff9dbb;
+}
+
+/* === 6. 评论展示区域 === */
+.wl-comment,
+.wl-panel {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+}
+
+/* === 7. 头像圆形 === */
+.wl-avatar {
+  border-radius: 50%;
+}
+
+/* === 8. 条纹装饰在文本框上方 === */
+.wl-editor::before,
+.wl-editor::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffd6e0,
+    #ffd6e0 5px,
+    #ffc0cb 5px,
+    #ffc0cb 10px
+  );
+  top: -10px;
+  opacity: 0.7;
+  z-index: 1;
+}
+.wl-editor::before {
+  left: 10px;
+  transform: rotate(-3deg);
+}
+.wl-editor::after {
+  right: 10px;
+  transform: rotate(5deg);
+}
+
+/* ✅ 隐藏 Waline 评论区中的 UA 信息 */
+.wlua {
+  display: none !important;
+}
+.wl-avatar img {
+  content: url('/waline1.webp') !important;
+}
