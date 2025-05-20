@@ -2,8 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import "../styles/global.css";
-
-const { pageTitle, frontmatter = {} } = Astro.props;
+const { pageTitle, frontmatter = {}, showTitle = false } = Astro.props;
 const {
   title = pageTitle,
   description = '幸せは食べて、寝て、人生を楽しんで待て',
@@ -34,18 +33,37 @@ const {
 
     <!-- 字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC&family=VT323&display=swap" rel="stylesheet" />
+
+    <!-- ✅ Waline 样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
   </head>
+
   <body>
     <div class="container">
       <Header />
-      <h1>{pageTitle}</h1>
-      <slot />
+      <main class="page-body">
+        {(showTitle || Astro.url.pathname === '/') && <h1>{pageTitle}</h1>}
+        <slot />
+      </main>
 
-      <!-- ✅ 修复了 script 的闭合问题 -->
+      <!-- ✅ Waline 评论区容器 -->
+      <div id="waline" class="mt-10" />
+
+      <!-- ✅ Waline 初始化脚本 -->
+      <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+          el: '#waline',
+          serverURL: 'https://reliable-khapse-ca482e.netlify.app/.netlify/functions/comment', // 替换为你的实际 Waline 服务端地址
+          path: location.pathname, // 确保每篇文章的评论区是独立的
+        });
+      </script>
+
+      <!-- ✅ 图片放大功能 -->
       <script>
         document.addEventListener('DOMContentLoaded', () => {
           document.querySelectorAll('img').forEach(img => {
-            // 🛑 如果是卡比图就跳过，不加放大效果
             if (img.closest('#musicToggle')) return;
 
             img.classList.add('zoomable');
@@ -101,7 +119,7 @@ const {
             updateTrack();
           }
           clickCount = 0;
-        }, 300); // 300ms 内连续点击识别为多击
+        }, 300);
       });
 
       audioPlayer.addEventListener('ended', () => {

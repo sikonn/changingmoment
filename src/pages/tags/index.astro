@@ -1,12 +1,12 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/Layout.astro';
 const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true }));
 const visiblePosts = allPosts.filter((post: any) => !post.frontmatter.hidden);
 const tags = [...new Set(visiblePosts.map((post: any) => post.frontmatter.tags || []).flat())];
 const pageTitle = "Tags";
 
 ---
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout pageTitle={pageTitle} showTitle={true}>
   <div class="tags" id="tag-container">
     {tags.map((tag) => (
       <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>

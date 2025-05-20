@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/Layout.astro';
 import BlogPost from '../../components/BlogPost.astro';
 
 type Post = {
@@ -42,7 +42,7 @@ const { tag } = Astro.params;
 const { posts } = Astro.props;
 ---
 
-<BaseLayout pageTitle={tag}>
+<BaseLayout pageTitle={tag} showTitle={true}>
   <p>标签：<strong>{tag}</strong></p>
   <ul>
     {posts.map((post) => (
