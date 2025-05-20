@@ -52,14 +52,17 @@ const {
       <!-- ✅ Waline 初始化脚本 -->
       <script type="module">
         import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
-
+      
         init({
           el: '#waline',
-          serverURL: 'https://reliable-khapse-ca482e.netlify.app/.netlify/functions/comment', // 替换为你的实际 Waline 服务端地址
-          path: location.pathname, // 确保每篇文章的评论区是独立的
+          serverURL: 'https://your-server-url',
+          path: location.pathname,
+          locale: {
+            placeholder: '写点什么吧～你写下的每个字我都会认真看！', // ← 你想改的提示语
+          }
         });
       </script>
-
+      
       <!-- ✅ 图片放大功能 -->
       <script>
         document.addEventListener('DOMContentLoaded', () => {
