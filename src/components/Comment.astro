@@ -1,0 +1,24 @@
+---
+--- 
+<!-- ✅ Waline 样式 -->
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+
+<!-- ✅ 评论容器 -->
+<div id="waline" class="mt-10" />
+
+<!-- ✅ Waline 初始化脚本 -->
+<script type="module">
+  import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+  init({
+    el: '#waline',
+    serverURL: 'https://reliable-khapse-ca482e.netlify.app/.netlify/functions/comment/',
+    path: location.pathname,
+    locale: {
+      placeholder: '好久不见～写点什么吧！',
+    },
+    emoji: [
+      'https://cdn.jsdelivr.net/gh/norevi/waline-blobcatemojis@1.0/blobs/',
+    ],
+  });
+</script>

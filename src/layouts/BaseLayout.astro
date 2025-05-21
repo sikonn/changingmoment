@@ -1,7 +1,9 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Comment from '../components/Comment.astro';
 import "../styles/global.css";
+
 const { pageTitle, frontmatter = {}, showTitle = false } = Astro.props;
 const {
   title = pageTitle,
@@ -25,7 +27,6 @@ const {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={`https://changingmoments.one/posts/${slug}`} />
     <meta property="og:image" content={frontmatter.image} />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -33,9 +34,6 @@ const {
 
     <!-- 字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC&family=VT323&display=swap" rel="stylesheet" />
-
-    <!-- ✅ Waline 样式 -->
-    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
   </head>
 
   <body>
@@ -46,23 +44,9 @@ const {
         <slot />
       </main>
 
-      <!-- ✅ Waline 评论区容器 -->
-      <div id="waline" class="mt-10" />
+      <!-- ✅ 评论组件 -->
+      <Comment />
 
-      <!-- ✅ Waline 初始化脚本 -->
-      <script type="module">
-        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
-      
-        init({
-          el: '#waline',
-          serverURL: 'https://reliable-khapse-ca482e.netlify.app/.netlify/functions/comment/',
-          path: location.pathname,
-          locale: {
-            placeholder: '好久不见～写点什么吧！', // ← 你想改的提示语
-          }
-        });
-      </script>
-      
       <!-- ✅ 图片放大功能 -->
       <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -74,9 +58,7 @@ const {
               const overlay = document.createElement('div');
               overlay.className = 'zoom-overlay';
               overlay.innerHTML = `<img src="${img.src}" alt="${img.alt}" />`;
-              overlay.addEventListener('click', () => {
-                overlay.remove();
-              });
+              overlay.addEventListener('click', () => overlay.remove());
               document.body.appendChild(overlay);
             });
           });
@@ -86,14 +68,13 @@ const {
       <Footer />
     </div>
 
-    <!-- 卡比图标，作为控制器 -->
+    <!-- 音乐控制器 -->
     <div id="musicToggle">
       <img src="https://res.stelpolva.moe/stpv/615a661f-3b7c-4ba9-b29a-f1b8eee13979.apng" alt="Toggle Music" width="73" height="85" />
     </div>
 
-    <!-- 隐藏的音乐播放器 -->
+    <!-- 音乐播放器 -->
     <audio id="audioPlayer" preload="auto" src="/music/music1.m4a"></audio>
-
     <script>
       const audioPlayer = document.getElementById('audioPlayer');
       const musicToggle = document.getElementById('musicToggle');

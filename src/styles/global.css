@@ -34,18 +34,7 @@ body {
   position: relative;
 }
 
-/* 可爱贴纸 */
-.container::before {
-  content: "";
-  position: absolute;
-  top: -12px;
-  left: -12px;
-  width: 40px;
-  height: 40px;
-  background: url('/stickers/star.png') no-repeat center center;
-  background-size: contain;
-  z-index: 10;
-}
+
 
 /* 图片自适应 */
 .container img {
@@ -611,7 +600,7 @@ img.float-img50 {
   box-shadow:
     2px 2px 5px rgba(0, 0, 0, 0.1),
     inset 0 0 10px #ffe6eb;
-  font-family: 'Georgia', serif;
+  font-family: 'Noto Serif SC', serif;
   color: #6b4c4c;
   margin-bottom: 1rem;
   position: relative;
@@ -625,7 +614,7 @@ img.float-img50 {
   border-bottom: 1px solid #f3b6c1;
   padding: 6px;
   width: 100%;
-  font-family: 'Georgia', serif;
+  font-family: 'Noto Serif SC', serif;
   color: #6b4c4c;
   outline: none;
 }
