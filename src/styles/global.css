@@ -708,3 +708,13 @@ img.float-img50 {
 .wl-avatar img {
   content: url('/waline1.webp') !important;
 }
+/* 🛠️ 修复表情包拉伸问题 */
+#waline .wl-content img {
+  max-width: 20px;
+  max-height: 20px;
+  height: auto;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  object-fit: contain;
+}
