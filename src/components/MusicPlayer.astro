@@ -1,0 +1,54 @@
+---
+// components/MusicPlayer.astro
+---
+
+<div id="musicToggle">
+    <img
+      src="https://res.stelpolva.moe/stpv/615a661f-3b7c-4ba9-b29a-f1b8eee13979.apng"
+      alt="Toggle Music"
+      width="73"
+      height="85"
+    />
+  </div>
+  
+  <audio id="audioPlayer" preload="auto"></audio>
+  
+  <script>
+    const audioPlayer = document.getElementById('audioPlayer');
+    const musicToggle = document.getElementById('musicToggle');
+    const totalTracks = 50;
+  
+    // ✅ 随机选一首
+    let currentTrack = Math.floor(Math.random() * totalTracks) + 1;
+    audioPlayer.src = `/music/music${currentTrack}.m4a`;
+  
+    let clickCount = 0;
+    let clickTimer;
+  
+    function playRandomTrack() {
+      currentTrack = Math.floor(Math.random() * totalTracks) + 1;
+      audioPlayer.src = `/music/music${currentTrack}.m4a`;
+      audioPlayer.play();
+    }
+  
+    musicToggle.addEventListener('click', () => {
+      clickCount++;
+      clearTimeout(clickTimer);
+  
+      clickTimer = setTimeout(() => {
+        if (clickCount === 1) {
+          audioPlayer.play(); // ▶️ 第一次点击：播放当前歌曲
+        } else if (clickCount === 2) {
+          audioPlayer.pause(); // ⏸️ 第二次点击：暂停
+        } else if (clickCount === 3) {
+          playRandomTrack(); // 🔀 第三次点击：随机播放下一首
+        }
+        clickCount = 0;
+      }, 300);
+    });
+  
+    audioPlayer.addEventListener('ended', () => {
+      playRandomTrack(); // 播放结束后自动播放下一首随机曲
+    });
+  </script>
+  
