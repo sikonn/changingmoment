@@ -590,6 +590,18 @@ img.float-img50 {
   right: 12px;
   transform: rotate(5deg);
 }
+/* 可爱贴纸 */
+.container::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 40px;
+  height: 40px;
+  background: url('/stickers/star.png') no-repeat center center;
+  background-size: contain;
+  z-index: 10;
+}
 
 /* === 2. 输入区域容器（仿便签块） === */
 .wl-input,
@@ -706,4 +718,15 @@ img.float-img50 {
   display: inline-block;
   vertical-align: middle;
   object-fit: contain;
+}
+/* 清除可能的灰色框背景 */
+.wl-comment,
+.wl-panel,
+.wl-card,
+.wl-item,
+.wl-comment-item,
+.wl-content {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
 }
