@@ -1,6 +1,3 @@
----
----
-
 <div id="musicToggle">
   <img
     src="https://res.stelpolva.moe/stpv/615a661f-3b7c-4ba9-b29a-f1b8eee13979.apng"
@@ -15,14 +12,25 @@
 <script>
   const audioPlayer = document.getElementById('audioPlayer');
   const musicToggle = document.getElementById('musicToggle');
-  const totalTracks = 50;
+  const totalTracks = 70;
 
-  // 随机选一首
-  let currentTrack = Math.floor(Math.random() * totalTracks) + 1;
-  audioPlayer.src = `/music/music${currentTrack}.m4a`;
-
+  let currentTrack = 1;
   let clickCount = 0;
   let clickTimer;
+  let isRecover = false;
+
+  // 🧠 从localStorage恢复播放状态
+  const savedIndex = localStorage.getItem("musicIndex");
+  const savedTime = localStorage.getItem("musicTime");
+  const wasPlaying = localStorage.getItem("isPlaying") === "true";
+
+  if (savedIndex !== null) {
+    currentTrack = parseInt(savedIndex);
+  } else {
+    currentTrack = Math.floor(Math.random() * totalTracks) + 1;
+  }
+
+  audioPlayer.src = `/music/music${currentTrack}.m4a`;
 
   function playRandomTrack() {
     currentTrack = Math.floor(Math.random() * totalTracks) + 1;
@@ -37,23 +45,40 @@
     clickTimer = setTimeout(() => {
       if (clickCount === 1) {
         audioPlayer.play();
+        localStorage.setItem("isPlaying", "true");
       } else if (clickCount === 2) {
         audioPlayer.pause();
+        localStorage.setItem("isPlaying", "false");
       } else if (clickCount === 3) {
         playRandomTrack();
+        localStorage.setItem("isPlaying", "true");
       }
       clickCount = 0;
     }, 300);
   });
 
+  // 🧠 音乐播放完成后，自动下一首
   audioPlayer.addEventListener('ended', () => {
     playRandomTrack();
   });
 
-  // 自动播放 - 页面加载后立即尝试播放
-  window.addEventListener('load', () => {
-    audioPlayer.play().catch(e => {
-      console.log('自动播放失败，可能被浏览器阻止:', e);
-    });
+  // ✅ 页面加载后，根据状态恢复播放
+  audioPlayer.addEventListener("canplay", () => {
+    if (!isRecover && wasPlaying) {
+      if (savedTime) {
+        audioPlayer.currentTime = parseFloat(savedTime);
+      }
+      audioPlayer.play().catch(e => {
+        console.log("自动恢复播放失败：", e);
+      });
+      isRecover = true;
+    }
+  });
+
+  // ✅ 页面离开前，保存状态
+  window.addEventListener("beforeunload", () => {
+    localStorage.setItem("musicIndex", currentTrack);
+    localStorage.setItem("musicTime", audioPlayer.currentTime);
+    localStorage.setItem("isPlaying", !audioPlayer.paused);
   });
 </script>
