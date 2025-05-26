@@ -9,7 +9,7 @@ const allPostsRaw = Object.values(
 
 // 过滤掉 hidden: true 的文章，用于显示
 const allPosts = allPostsRaw
-  .filter((post) => !post.frontmatter.hidden)
+  .filter((post) => !post.frontmatter.hidden && !post.frontmatter.draft)
   .sort((a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime());
 
 // 分组：按年份分类
