@@ -339,120 +339,91 @@ iframe {
   border-radius: 8px;
   margin: 1rem 0;
 }
-/* === NeoDB / Douban card — fixed poster + right content === */
+
 .db-card {
   display: flex;
-  gap: 1rem;
-  /* 不再强行固定高度，用最小高度保证海报比例；内容多时能自然增高 */
-  min-height: 180px;
+  height: 180px; /* 固定高度 */
   border-radius: 12px;
   overflow: hidden;
-  border: 2px dashed rgba(255, 219, 224, 0.6);
+  border: 2px dashed rgba(255, 219, 224, 0.6); /* 浅粉色虚线边框 */
   margin: 1rem 0;
-  background: rgba(241, 228, 233, 0.5);
+  background: rgba(241, 228, 233, 0.5); /* 浅粉半透明背景 */
   font-family: 'Noto Serif SC', serif;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
-  transition: box-shadow .3s ease;
+  transition: box-shadow 0.3s ease;
 }
-.db-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); }
 
-/* 让整张卡片可点击时不破坏布局 */
+.db-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
 .db-card-subject {
   display: flex;
   width: 100%;
   color: inherit;
-  text-decoration: none;
 }
 
-/* —— 左侧海报 —— */
 .db-card-post {
-  flex: 0 0 128px;         /* 固定视觉宽度 */
-  width: 128px;
-  aspect-ratio: 2 / 3;     /* 竖版比例 */
-  border-radius: 10px;
+  flex-shrink: 0;
+  height: 100%; /* 高度 = 卡片高度 */
   overflow: hidden;
-  background-color: #f3f3f3;
-  align-self: flex-start;  /* 避免被拉满父容器高度 */
-  display: block;
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
 }
+
 .db-card-post img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;       /* 填充裁切，更像正式海报 */
+  height: 100%;          /* 图片高度 = 卡片高度 */
+  width: auto;           /* 宽度按比例适应 */
+  object-fit: contain;   /* 保持图片比例，不裁剪 */
   display: block;
 }
 
-/* —— 右侧内容区 —— */
 .db-card-content {
-  flex: 1 1 auto;
-  min-width: 0;            /* 允许内容在小屏正确收缩 */
-  padding: 1rem 1rem 1rem .25rem;
+  padding: 1rem 1rem 1rem 1.5rem;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: .45rem;
   justify-content: center;
+  gap: 0.3rem;
 }
 
-/* 标题 */
 .db-card-title {
   font-weight: 700;
-  font-size: 1.05rem;
-  line-height: 1.35;
+  font-size: 1.15rem;
   color: #222;
-  margin: 0;
-  word-break: break-word;
 }
 
-/* 评分（emoji ⭐ 或 svg 都能对齐） */
 .rating {
-  display: inline-flex;
-  align-items: center;
-  gap: .15rem;
   font-weight: 600;
-  font-size: 1rem;
-  line-height: 1;
-  margin: .1rem 0 .2rem;
+  font-size: 0.95rem;
+  margin-top: 0.2rem;
 }
-.rating svg { width: 1rem; height: 1rem; }
 
-/* 简介：2–3 行省略 */
 .db-card-abstract {
-  font-size: .95rem;
+  font-size: 0.9rem;
   color: #555;
-  line-height: 1.6;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;   /* 想更紧凑可改为 2 */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin: 0;
+  margin-top: 0.4rem;
+  line-height: 1.3;
 }
 
-/* —— 移动端：上下堆叠，海报居中 —— */
 @media (max-width: 600px) {
   .db-card {
     flex-direction: column;
-    gap: .75rem;
-    padding: .75rem;
+    height: auto;
   }
-  .db-card-post {
-    width: 56%;
-    max-width: 220px;
-    margin: .25rem auto 0;
-    aspect-ratio: 2 / 3;
-  }
-  .db-card-content {
-    padding: .25rem .25rem .75rem;
-  }
-}
 
-/* （可选）深色模式支持：如果主题有 .dark 或 [data-theme="dark"] */
-.dark .db-card,
-[data-theme="dark"] .db-card {
-  background: rgba(40, 38, 41, 0.5);
-  border-color: rgba(255, 219, 224, 0.25);
+  .db-card-post {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+  }
+
+  .db-card-post img {
+    width: 100%;
+    height: auto;
+  }
 }
-.dark .db-card-title { color: #eee; }
-.dark .db-card-abstract { color: #cfcfcf; }
 
 /* 引用块 - 便签纸风格 */
 blockquote {
